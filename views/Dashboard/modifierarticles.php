@@ -658,7 +658,7 @@ btnscrolltotop.addEventListener("click", function () {
             <div class="row">
                 <div class="col">
                     <p class="lead text-center">
-                        Copyright &copy; <span id="year"></span> SPORTUN
+                        Copyright &copy; <span id="year"></span> NAJA7NI
                     </p>
                 </div>
             </div>

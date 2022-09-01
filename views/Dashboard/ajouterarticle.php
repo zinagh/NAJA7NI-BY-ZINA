@@ -1,5 +1,5 @@
-<?php include_once 'C://wamp64/www/sportuni/controller/ArticleC.php';
-include_once 'C://wamp64/www/sportuni/model/Articles.php';
+<?php include_once 'C://wamp64/www/naja7ni/controller/ArticleC.php';
+include_once 'C://wamp64/www/naja7ni/model/Articles.php';
 
 $error = "";
 
@@ -56,7 +56,7 @@ $error = "";
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>SporTun</title>
+    <title>NAJA7NI</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> 
@@ -110,11 +110,7 @@ $error = "";
                                 <i class="fas fa-bullhorn"></i>
                                 <span class="bot-line"></span>Gestion des annonces</a>
                         </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
+                  
                         <li class="has-sub">
                             <a href="gestionactualites.php">
                                 <i class="fas fa-list-alt"></i>
@@ -510,7 +506,7 @@ $error = "";
         <input type="text" class="form-control" id="auteur" name="auteur">
     </div>
     <div class="form-group">
-        <label for="urlImage">Upload Image</label>
+        <label for="urlImage">Upload Video</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="urlImage" name="urlImage">
             <label for="urlImage" class="custom-file-label">Choose File</label>
@@ -587,7 +583,7 @@ btnscrolltotop.addEventListener("click", function () {
             <div class="row">
                 <div class="col">
                     <p class="lead text-center">
-                        Copyright &copy; <span id="year"></span> SPORTUN
+                        Copyright &copy; <span id="year"></span> NAJA7NI
                     </p>
                 </div>
             </div>

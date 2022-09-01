@@ -121,37 +121,16 @@ $NbAnnonces=mysqli_num_rows($result);
                             <li>
                                 <a href="gestionannonces.php">
                                     <i class="fas fa-bullhorn"></i>
-                                    <span class="bot-line"></span>Gestion des produits</a>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
                             </li>
-                            <li>
-                                <a href="gestionbillets.php">
-                                    <i class="fas fa-tag"></i>
-                                    <span class="bot-line"></span>Gestion des billets</a>
-                            </li> 
-                            <li class="has-sub">
-                                <a href="gestionventes.php">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="bot-line"></span>Gestion des ventes</a>
-                            
-                            </li>  
+                     
                             <li class="has-sub">
                             <a href="gestionactualites.php">
                                     <i class="fas fa-list-alt"></i>
-                                    <span class="bot-line"></span>Gestion des actualités</a>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
                             
                             </li>
-                            <li class="has-sub">
-                            <a href="ModifierPublicite.php">
-                                <i class="fas fa-bookmark"></i>
-                                <span class="bot-line"></span>Gestion des publicités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="Modifierpromo.php">
-                                <i class="fas fa-bell"></i>
-                                <span class="bot-line"></span>Gestion des promotions</a>
-
-                        </li>
+                         
                             <li class="has-sub">
                                 <a href="gestioncomptes.php">
                                     <i class="fas fa-user"></i>

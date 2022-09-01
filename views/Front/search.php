@@ -1,6 +1,6 @@
-<?php include "C://wamp64/www/SporTuni/controller/ArticleC.php";?>
+<?php include "C://wamp64/www/naja7ni/controller/ArticleC.php";?>
 <head>
-<title>SporTun</title>
+<title>naja7ni</title>
 <link rel="shortcut icon" href="assets/img/logo.ico">
 <link rel="stylesheet" type="text/css" href="news.css">
 <link rel="stylesheet" type="text/css" href="news.css">

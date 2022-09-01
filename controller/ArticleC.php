@@ -1,6 +1,6 @@
 <?PHP
-include "C://wamp64/www/sportuni/config.php";
-require_once 'C://wamp64/www/sportuni/model/Articles.php';
+include "C://wamp64/www/naja7ni/config.php";
+require_once 'C://wamp64/www/naja7ni/model/Articles.php';
 
 class articleC
 {
@@ -120,12 +120,12 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function afficherfootball()
+    public function afficherjv()
     {
         $limit = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
-        $sql = "SELECT * FROM article WHERE postCategory = 'FootBall' order by Datearticle desc LIMIT $start, $limit";
+        $sql = "SELECT * FROM article WHERE postCategory = 'JAVA' order by Datearticle desc LIMIT $start, $limit";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -136,7 +136,7 @@ class articleC
     }
     public function afficherfoot()
     {
-        $sql = "SELECT * FROM article WHERE postCategory = 'PHP' order by Datearticle desc LIMIT 2";
+        $sql = "SELECT * FROM article WHERE postCategory = 'JAVA' order by Datearticle desc LIMIT 2";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -145,12 +145,12 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function affichertennis()
+    public function afficherpoo()
     {
         $limit = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
-        $sql = "SELECT * FROM article WHERE postCategory = 'Tennis' order by Datearticle desc LIMIT $start, $limit";
+        $sql = "SELECT * FROM article WHERE postCategory = 'POO' order by Datearticle desc LIMIT $start, $limit";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -164,7 +164,7 @@ class articleC
         $limit = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
-        $sql = "SELECT * FROM article WHERE postCategory = 'Athlétisme' order by Datearticle desc LIMIT $start, $limit";
+        $sql = "SELECT * FROM article WHERE postCategory = 'PHP' order by Datearticle desc LIMIT $start, $limit";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -173,12 +173,12 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function afficherhandball()
+    public function afficherpy()
     {
         $limit = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
-        $sql = "SELECT * FROM article WHERE postCategory = 'HandBall' order by Datearticle desc LIMIT $start, $limit";
+        $sql = "SELECT * FROM article WHERE postCategory = 'PYTHON' order by Datearticle desc LIMIT $start, $limit";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -192,7 +192,21 @@ class articleC
         $limit = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page - 1) * $limit;
-        $sql = "SELECT * FROM article WHERE postCategory = 'Cyclisme' order by Datearticle desc LIMIT $start, $limit";
+        $sql = "SELECT * FROM article WHERE postCategory = 'HTML' order by Datearticle desc LIMIT $start, $limit";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    public function afficherjs()
+    {
+        $limit = 8;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start = ($page - 1) * $limit;
+        $sql = "SELECT * FROM article WHERE postCategory = 'JAVASCRIPT' order by Datearticle desc LIMIT $start, $limit";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -223,9 +237,9 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function affichernbrefb()
+    public function affichernbrejs()
     {
-        $sql = "SELECT COUNT(postCategory) as nbrfb FROM article WHERE postCategory = 'FootBall'";
+        $sql = "SELECT COUNT(postCategory) as nbrjs FROM article WHERE postCategory = 'JAVASCRIPT'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -234,9 +248,9 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function affichernbretennis()
+    public function affichernbrejv()
     {
-        $sql = "SELECT COUNT(postCategory) as nbrtn FROM article WHERE postCategory = 'Tennis'";
+        $sql = "SELECT COUNT(postCategory) as nbrfb FROM article WHERE postCategory = 'JAVA'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -245,9 +259,20 @@ class articleC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    public function affichernbrehb()
+    public function affichernbrepoo()
     {
-        $sql = "SELECT COUNT(postCategory) as nbrhb FROM article WHERE postCategory = 'HandBall'";
+        $sql = "SELECT COUNT(postCategory) as nbrtn FROM article WHERE postCategory = 'POO'";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    public function affichernbrepy()
+    {
+        $sql = "SELECT COUNT(postCategory) as nbrhb FROM article WHERE postCategory = 'PYTHON'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -258,7 +283,7 @@ class articleC
     }
     public function affichernbreath()
     {
-        $sql = "SELECT COUNT(postCategory) as nbrath FROM article WHERE postCategory = 'Athlétisme'";
+        $sql = "SELECT COUNT(postCategory) as nbrath FROM article WHERE postCategory = 'PHP'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -269,7 +294,7 @@ class articleC
     }
     public function affichernbrecyc()
     {
-        $sql = "SELECT COUNT(postCategory) as nbrcyc FROM article WHERE postCategory = 'Cyclisme'";
+        $sql = "SELECT COUNT(postCategory) as nbrcyc FROM article WHERE postCategory = 'HTML'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -439,36 +464,37 @@ public function show_questions($course_id)
     }
 }
 public function show_result($data)
-{
-    $ans=implode("", $data);    // to break the $data into string chunk bcoz $data is an array
-    $course_id=$_SESSION['course_id'];  // the session variable is created in question_show.php file
-    $right=0;
-    $wrong=0;
-    $no_answer=0;
-
-    $query=$this->conn->query("select id,answer from question_test where course_id='$course_id'");
-
-    while($row=$query->fetch_array(MYSQLI_ASSOC))      // while loop to fetch all data one by one and store in cat_data array variable
-    {	
-        if ($row['answer']==$_POST[$row['id']])         //if answer is match
-         {
-            $right++;
-        }
-        elseif ($_POST[$row['id']]=="no_attempt")   // if user didnt selected any answer
-         {
-            $no_answer++;
-        }
-        else
-        {
-            $wrong++;                          // if wrong answer is selected by user
-        }
-
+	{
+		$ans=implode("", $data);    // to break the $data into string chunk bcoz $data is an array
+		$course_id=$_SESSION['course_id'];  // the session variable is created in question_show.php file
+		$right=0;
+		$wrong=0;
+		$no_answer=0;
+        $sql ="select id,answer from question_test where course_id='$course_id'";
+        $db = config::getConnexion();
+        try {	
+			if ($row['answer']==$_POST[$row['id']])         //if answer is match
+			 {
+				$right++;
+			}
+			elseif ($_POST[$row['id']]=="no_attempt")   // if user didnt selected any answer
+			 {
+				$no_answer++;
+			}
+			else
+			{
+				$wrong++;                          // if wrong answer is selected by user
+			}
+		
+		$array=array();                //creating an array
+		$array['right']=$right;         // putting the values inside the array
+		$array['wrong']=$wrong;
+		$array['not_attempted']=$no_answer;
+		return $array;		
     }
-    $array=array();                //creating an array
-    $array['right']=$right;         // putting the values inside the array
-    $array['wrong']=$wrong;
-    $array['not_attempted']=$no_answer;
-    return $array;					//returning the array filled with above values
- }
-
+    catch (Exception $e) {
+        die('Erreur: ' . $e->getMessage());
+    }			//returning the array filled with above values
+	 }
+  
 }

@@ -1,4 +1,4 @@
-<?php require_once "C://wamp64/www/SporTun/controller/ArticleC.php" ?>
+<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
 
 
 
@@ -107,6 +107,12 @@
 
 
                             foreach ($listearticle as $row) {
+                                if ( $row['postCategory']=="JAVA") $path='java.jpg';
+                                               if ( $row['postCategory']=="PHP") $path='php.jpg';
+                                               if ( $row['postCategory']=="HTML") $path='html.jpg';
+                                               if ( $row['postCategory']=="JAVASCRIPT") $path='js.jpg';
+                                               if ( $row['postCategory']=="POO") $path='poo.jpg';
+                                               if ( $row['postCategory']=="PYTHON") $path='python.jpg';
                             ?>
                                 <tr class="table-primary">
                                     <td><?PHP echo $row['idNewsArticle']; ?></td>
@@ -115,7 +121,7 @@
                                         <a class="btn btn-primary" href="affichertexte.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Afficher TEXTE</a>
                                     </td>
                                     <td><?PHP echo $row['auteur']; ?></td>
-                                    <td><img width="100" src="../Dashboard/images/<?PHP echo $row['urlImage']; ?> "> </td>
+                                    <td><img width="100" src="../Dashboard/images/<?PHP echo $path; ?>"> </td>
                                     <td><?PHP echo $row['notifCreateur']; ?></td>
                                     <td><?PHP echo $row['Datearticle']; ?></td>
                                     <td><?PHP echo $row['postCategory']; ?></td>

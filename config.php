@@ -12,7 +12,7 @@ class config
             try {
 
                 self::$pdo = new PDO(
-                    'mysql:host=localhost;dbname=sportun',
+                    'mysql:host=localhost;dbname=naja7ni',
                     'root',
                     '',
                     [

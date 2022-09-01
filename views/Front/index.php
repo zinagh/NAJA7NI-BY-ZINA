@@ -13,7 +13,7 @@ if (isset($_SESSION["email"]))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SporTun</title>
+    <title>NAJA7NI</title>
     <link rel="shortcut icon" href="assets/img/logo.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -30,12 +30,12 @@ if (isset($_SESSION["email"]))
         <nav>
             <ul id="MenuItems">
             <li><a href="index.php">Acceuil</a></li>
-                        <li><a href="annonce.php">Quiz</a></li>
+                        <li><a href="quiz.php">Quiz</a></li>
                         <?php if($compte=="Profil"){ 
                 echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
                 }?>
                 
-                        <li><a href="actualites.php">Cours</a></li>
+                        <li><a href="cours.php">Cours</a></li>
               
                         <li><a href="account.php"><?php echo $compte ?></a></li>
             </ul>
@@ -46,7 +46,7 @@ if (isset($_SESSION["email"]))
       <div class="row">
         <div class="col-2">
             <h1>Donnez Un Nouveau Style <br> à Vos Etudes!</h1>
-            <p>SporTun met en rapport les vendeurs et les acheteurs en Tunisie <br>
+            <p>NAJA7NI met en rapport les vendeurs et les acheteurs en Tunisie <br>
                  et offre une expérience utilisateur exceptionnelle</p>
          <a href="annonce.php" class="btn">Explorer &#8594; </a>
         </div>
@@ -72,7 +72,7 @@ if (isset($_SESSION["email"]))
                 </div>
                 <div class="footer-col-2">
                     <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                    <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                    <p>Donnez Un Nouveau Style à Votre Etudes  !</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Liens</h3>
@@ -94,7 +94,7 @@ if (isset($_SESSION["email"]))
                 </div>
             </div>
             <hr>
-            <p class="copyright">Copyright 2020 - SporTun</p>
+            <p class="copyright">Copyright 2022 - NAJA7NI</p>
         </div>
     </div>
     <!-------js for toggle menu -------->

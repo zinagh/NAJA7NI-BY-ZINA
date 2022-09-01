@@ -1,5 +1,5 @@
-<?php include_once 'C://wamp64/www/SporTun/controller/ArticleC.php';
-include_once 'C://wamp64/www/SporTun/model/Articles.php';
+<?php include_once 'C://wamp64/www/naja7ni/controller/ArticleC.php';
+include_once 'C://wamp64/www/naja7ni/model/Articles.php';
 include 'DBconnection.php';
 session_start();
 if (!isset($_SESSION["emailadmin"]))
@@ -107,40 +107,25 @@ $error = "";
                     </div>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
-                            <li>
-                                <a href="gestionannonces.php">
-                                    <i class="fas fa-bullhorn"></i>
-                                    <span class="bot-line"></span>Gestion des produits</a>
-                            </li>
+                        <li class="has-sub">
+                            <a href="index.php">
+                                <i class="fas fa-home"></i>Acceuil
+                                <span class="bot-line"></span>
+                            </a>
+                        </li>
                             <li>
                                 <a href="gestionbillets.php">
                                     <i class="fas fa-tag"></i>
-                                    <span class="bot-line"></span>Gestion des billets</a>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
                             </li> 
-                            <li class="has-sub">
-                                <a href="gestionventes.php">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="bot-line"></span>Gestion des ventes</a>
-                            
-                            </li>  
+                          
                             <li class="has-sub">
                             <a href="gestionactualites.php">
                                     <i class="fas fa-list-alt"></i>
-                                    <span class="bot-line"></span>Gestion des actualités</a>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
                             
                             </li>
-                            <li class="has-sub">
-                            <a href="ModifierPublicite.php">
-                                <i class="fas fa-bookmark"></i>
-                                <span class="bot-line"></span>Gestion des publicités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="Modifierpromo.php">
-                                <i class="fas fa-bell"></i>
-                                <span class="bot-line"></span>Gestion des promotions</a>
-
-                        </li>
+                        
                             <li class="has-sub">
                                 <a href="gestioncomptes.php">
                                     <i class="fas fa-user"></i>
@@ -207,7 +192,7 @@ $error = "";
                             foreach ($nbre as $row) {
                             ?>
                                                                 <td><?PHP echo $row['nbrart'] ; ?></td> <?php } ?></h2>
-                                <span class="desc">Articles</span>
+                                <span class="desc">Cours</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -223,7 +208,7 @@ $error = "";
                             ?>
                                                                 <td><?PHP echo $row['nbr'] ; ?></td> <?php } ?>
 </h2>
-                                <span class="desc">Nombres D'Auteurs</span>
+                                <span class="desc">Nombres Des Professeurs</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-money"></i>
                                 </div>
@@ -239,7 +224,7 @@ $error = "";
             <div class="row">
                 <div class="col-md-3">
                     <a href="ajouterarticle.php" class="btn btn-primary btn-block" >
-                        <i class="fas fa-plus"></i> Ajouter Article
+                        <i class="fas fa-plus"></i> Ajouter Cours
                     </a>
                 </div>
             </div>
@@ -253,7 +238,7 @@ $error = "";
                 <div class="col-md-9" id="postParent">
                     <div class="card" id="postContainer">
                         <div class="card-header">
-                            <h4>3 derniers ARTICLES</h4>
+                            <h4>3 derniers Cours</h4>
                         </div>
                         
                                 
@@ -322,7 +307,7 @@ $error = "";
             <div class="row">
                 <div class="col">
                     <p class="lead text-center">
-                        Copyright &copy; <span id="year"></span> SPORTUN
+                        Copyright &copy; <span id="year"></span> NAJA7NI
                     </p>
                 </div>
             </div>

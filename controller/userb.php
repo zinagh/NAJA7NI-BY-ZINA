@@ -1,11 +1,11 @@
 <?PHP
-include "C://wamp64/www/SporTun/config.php";
-require_once 'C://wamp64/www/SporTun/model/user.php';
+include "C://wamp64/www/naja7ni/config.php";
+require_once 'C://wamp64/www/naja7ni/model/user.php';
 class userb{
-    public function adduser($user)
+    public function adduser1($user)
     {
-        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse, ban)
-        VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse, '0')";
+        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse)
+        VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
@@ -24,11 +24,34 @@ class userb{
             echo 'Erreur: ' . $e->getMessage();
         }
     }
+    public function adduser($user)
+    {
+    $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse)
+    VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse)";
+    $db = config::getConnexion();
+     try {
+         $query = $db->prepare($sql);
 
+         $query->execute([
+            'nom' => $user->getNom(),
+            'prenom' => $user->getPrenom(),
+            'email' => $user->getEmail(),
+            'mdp' => $user->getMdp(),
+            'datenaissance' => $user->getDatenaissance(),
+            'sexe' => $user->getSexe(),
+            'numtel' => $user->getNumtel(),
+            'adresse' => $user->getAdresse(),
+            'admin'=> $user->getAdmin(),
+         ]);
+     } catch (Exception $e) {
+         echo 'Erreur: ' . $e->getMessage();
+     }
+
+    }
     public function adduseradmin($user)
     {
-        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse, ban, admin)
-        VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse, '0', :admin)";
+        $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse, admin)
+        VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse, :admin)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);

@@ -1,4 +1,6 @@
 <?php
+    require_once 'C://wamp64/www/naja7ni/model/user.php';
+    require_once 'C://wamp64/www/naja7ni/controller/userb.php';
 include 'DBconnection.php';
 session_start();
 if (!isset($_SESSION["emailadmin"]))
@@ -14,13 +16,13 @@ if (!isset($_SESSION["emailadmin"]))
 
 $sql='select * from utilisateurs;';
 $result=mysqli_query($conn,$sql);
-$sql='select count(email) as total from utilisateurs where loggedin=1 ;';
+$sql='select count(email) as total from utilisateurs  ;';
 $resultat=mysqli_query($conn,$sql);
 $membersonline=mysqli_fetch_assoc($resultat);
 $sql='select count(email) as total from utilisateurs;';
 $resultat=mysqli_query($conn,$sql);
 $members=mysqli_fetch_assoc($resultat);
-$sql='select count(email) as total from utilisateurs where ban=1;';
+$sql='select count(email) as total from utilisateurs';
 $resultat=mysqli_query($conn,$sql);
 $membersbanned=mysqli_fetch_assoc($resultat);
 if(isset($_GET['choix'])){
@@ -31,7 +33,49 @@ if(isset($_GET['choix'])){
     $success="";
 if (isset($_GET['msg'])){
     $success=$_GET['msg'];
+}  
+
+$artC = new userb();
+if (
+    isset($_POST["nom"]) && 
+    isset($_POST["prenom"]) &&
+    isset($_POST["email"]) && 
+    isset($_POST["mdp"]) && 
+    isset($_POST["datenaissance"]) &&
+    isset($_POST["sexe"])  &&
+    isset($_POST['numtel']) &&
+    isset($_POST['adresse']) &&
+    isset($_POST['admin'])
+) {
+    if (
+        empty($_POST["nom"]) && 
+        empty($_POST["prenom"]) &&
+        empty($_POST["email"]) && 
+        empty($_POST["mdp"]) && 
+    empty($_POST["datenaissance"]) &&
+    empty($_POST["sexe"])  &&
+    empty($_POST['numtel']) &&
+    empty($_POST['adresse']) &&
+    empty($_POST['admin'])
+    ) {
+        $art = new user(
+            $_POST["nom"],
+            $_POST["prenom"],
+            $_POST["email"],
+            $_POST["mdp"],
+            $_POST["datenaissance"],
+            $_POST["sexe"],
+            $_POST['numtel'],
+            $_POST['adresse'],
+            $_POST['admin']
+        );
+        $artC->adduseradmin($art);
+        //header('Location:afficherUtilisateurs.php');
+    }
+    else
+    $error = "Missing information";
 }
+  
 ?>
 
 <!DOCTYPE html>
@@ -91,37 +135,17 @@ if (isset($_GET['msg'])){
                             <li>
                                 <a href="gestionannonces.php">
                                     <i class="fas fa-bullhorn"></i>
-                                    <span class="bot-line"></span>Gestion des produits</a>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
                             </li>
-                            <li>
-                                <a href="gestionbillets.php">
-                                    <i class="fas fa-tag"></i>
-                                    <span class="bot-line"></span>Gestion des billets</a>
-                            </li> 
-                            <li class="has-sub">
-                                <a href="gestionventes.php">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="bot-line"></span>Gestion des ventes</a>
-                            
-                            </li>  
+                           
+                           
                             <li class="has-sub">
                             <a href="gestionactualites.php">
                                     <i class="fas fa-list-alt"></i>
-                                    <span class="bot-line"></span>Gestion des actualités</a>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
                             
                             </li>
-                            <li class="has-sub">
-                            <a href="ModifierPublicite.php">
-                                <i class="fas fa-bookmark"></i>
-                                <span class="bot-line"></span>Gestion des publicités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="Modifierpromo.php">
-                                <i class="fas fa-bell"></i>
-                                <span class="bot-line"></span>Gestion des promotions</a>
-
-                        </li>
+                          
                             <li class="has-sub">
                                 <a href="gestioncomptes.php">
                                     <i class="fas fa-user"></i>
@@ -187,7 +211,6 @@ if (isset($_GET['msg'])){
                                             <?php if($choix==0){
                                             
                                             echo "<div> <a href='gestioncomptes.php?choix=0' class='button button5 active'  > <strong>Statistique des comptes</strong> </a> </div>";
-                                            
                                             echo "<div> <a href='gestioncomptes.php?choix=1' class='button button5 '  > <strong>Liste des comptes</strong> </a> </div>";
                                             echo " <div> <a href='gestioncomptes.php?choix=2' class='button button5 '  > <strong>Ajouter un compte</strong> </a> </div>";
                                             }
@@ -358,12 +381,12 @@ if (isset($_GET['msg'])){
          else { ?>
          <div class="ajout-compte-container">
          <div class="account-page">
-             <form action="../../controller/ajoutcompte.php" method="POST" name="fcompte" id="fcompte" class="fcompte">
-             <input type="text" name="nom" placeholder="Nom" id="nom">
+                       <form action="" method="post">
+                        <input type="text" name="nom" placeholder="Nom" id="nom">
                         <input type="text" name="prenom" placeholder="Prénom" id="prenom">
                         <input type="email" name="email" placeholder="Email" id="email">
                         <input type="password" name="mdp" placeholder="Mot de passe" id="mdp">
-                        <input type="password" name="mdp2" placeholder="Confirmer votre mot de passe" id="mdp2">
+                 <!--       <input type="password" name="mdp2" placeholder="Confirmer votre mot de passe" id="mdp2">-->
                         <input type="date" name="datenaissance" id="datenaissance" >
                         <input type="radio" name="sexe" id="homme" value="H" class="gender">
                         <label for="homme">Homme</label>
@@ -376,10 +399,10 @@ if (isset($_GET['msg'])){
                         <input type="radio" name="admin" id="user" value="0" class="admin">
                         <label for="user">Utilisateur</label>
                         <input type="radio" name="admin" id="admin" value="1" class="admin">
-                        <label for="Administratuer">Administratuer</label>
+                        <label for="Administratuer">Administrateur</label>
                         <p  id="erreur" style="color :#ff523b; margin:10px 0px;" ></p>
                         <p   style="color :green; margin:10px 0px;" ><?php echo $success; ?></p>
-                        <button  type="submit" class="btn" value="RegForm" onclick="return verif()">Ajouter</button>
+                        <button  type="submit" class="btn" value="RegForm">Ajouter</button>
                       </form>
          </div>
          </div>

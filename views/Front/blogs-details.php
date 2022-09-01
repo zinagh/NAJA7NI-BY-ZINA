@@ -1,10 +1,19 @@
+<?php
+include_once "DBconnection.php";
+session_start();
+$compte="Compte";
+if (isset($_SESSION["email"]))
+{
+    $compte="Profil";
+}
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
 
-    <title>SporTun</title>
+    <title>NAJA7NI</title>
     <link rel="shortcut icon" href="assets/img/logo.ico">
     <link rel="stylesheet" type="text/css" href="news1.css">
     <link rel="stylesheet" type="text/css" href="news1.css">
@@ -28,21 +37,25 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <a href="index.html"> <img src="assets/img/logo.png" alt="Logo SporTun"> </a>
+                    <a href="index.php"> <img src="assets/img/logo.png" alt="Logo SporTun"> </a>
                 </div>
                 <nav>
-                    <ul>
-                        <li><a href="index.php">Acceuil</a></li>
-                        <li><a href="annonce.html">Annonces</a></li>
-                        <li><a href="billets.html">Billets</a></li>
-                        <li><a href="actualites.php">Cours</a></li>
-                        <li><a href="account.html">Compte</a></li>
-                    </ul>
-                </nav>
-                <img src="assets/img/cart.png" class="cart" alt="">
+            <ul id="MenuItems">
+            <li><a href="index.php">Acceuil</a></li>
+                        <li><a href="quiz.php">Quiz</a></li>
+                        <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
+                }?>
+                
+                        <li><a href="cours.php">Cours</a></li>
+              
+                        <li><a href="account.php"><?php echo $compte ?></a></li>
+            </ul>
+            </ul>
+        </nav>
             </div>
        
-            <?php include "C://wamp64/www/SporTuni/controller/ArticleC.php";
+            <?php include "C://wamp64/www/naja7ni/controller/ArticleC.php";
 $breakC = new articleC();
 $break = $breakC->recentpost();?>
 <div class="barre">
@@ -282,7 +295,7 @@ $rel = $relC->affichermostviews();?>
             </div>
     <!--   <img  src="assets/img/<?PHP echo $row['urlImage']; ?>" alt="">  -->
                 <video width="320" height="240" controls="">
-  <source src="assets/img/<?PHP echo $row['urlImage']; ?>" type="video/mp4">
+  <source src="assets/img/<?PHP echo $path; ?>" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 
@@ -299,8 +312,7 @@ Your browser does not support the video tag.
                         </p1>
                     </div>
                 </div>
-                <?PHP }
-                    ?>
+         
                                 </div>
 
         </div>
@@ -321,11 +333,12 @@ btnscrolltotop.addEventListener("click", function () {
     });
 });
 </script>
-<?php 
+<?PHP
 $artC = new articleC();
 $listes = $artC->afi($catcat);
 
-?>
+ }
+                    ?>
         <div class="container">
             <div class="newsv1">
             <?PHP

@@ -1,6 +1,6 @@
 <?php
-include_once 'C://wamp64/www/sportuni/controller/ArticleC.php';
-include_once 'C://wamp64/www/sportuni/model/Articles.php';
+include_once 'C://wamp64/www/naja7ni/controller/ArticleC.php';
+include_once 'C://wamp64/www/naja7ni/model/Articles.php';
 include 'DBconnection.php';
 session_start();
 if ($_SESSION["email"]=="")
@@ -253,7 +253,7 @@ if (isset($_GET["msg"]))
                     </div>
                 </div>
                 <hr>
-                <p class="copyright">Copyright 2020 - SporTun</p>
+                NI</p>
             </div>
         </div>
 

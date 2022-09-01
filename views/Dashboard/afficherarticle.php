@@ -1,4 +1,4 @@
-<?php require_once "C://wamp64/www/SporTun/controller/ArticleC.php" ?>
+<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
 <?php
 session_start();
 // Page was not reloaded via a button press
@@ -688,7 +688,7 @@ btnscrolltotop.addEventListener("click", function () {
             <div class="row">
                 <div class="col">
                     <p class="lead text-center">
-                        Copyright &copy; <span id="year"></span> SPORTUN
+                        Copyright &copy; <span id="year"></span> NAJA7NI
                     </p>
                 </div>
             </div>

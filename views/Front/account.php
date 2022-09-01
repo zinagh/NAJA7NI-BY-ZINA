@@ -1,8 +1,10 @@
 <?php
 include 'DBconnection.php';
 session_start();
+$compte="Compte";
 if (isset($_SESSION["email"]))
 {
+    $compte="Profil";
     header("Location: profile.php");
     exit();
 }
@@ -33,17 +35,20 @@ $error=$_GET['msg'];
             <a href="index.php"> <img src="assets/img/logo.png"> </a>
         </div>
     
-    <nav>
-        <ul id="MenuItems">
+        <nav>
+            <ul id="MenuItems">
             <li><a href="index.php">Acceuil</a></li>
-            <li><a href="annonce.php">Produits</a></li>
-            <li><a href="billets.php">Billets</a></li>
-            <li><a href="actualites.php">Actualités</a></li>
-            <li><a href="Publicite.php">Publicite</a></li>
-            <li><a href="account.php">Compte</a></li>
-        </ul>
-    </nav>
-    <a href="panier.php"><img src="assets/img/cart.png" class="cart" alt=""></a>
+                        <li><a href="quiz.php">Quiz</a></li>
+                        <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
+                }?>
+                
+                        <li><a href="cours.php">Cours</a></li>
+              
+                        <li><a href="account.php"><?php echo $compte ?></a></li>
+            </ul>
+            </ul>
+        </nav>
     <img src="assets/img/menu.png" class="menu-icon" onclick="togglemenu()">
   </div>
   </div>
@@ -154,7 +159,7 @@ $error=$_GET['msg'];
             </div>
         </div>
         <hr>
-        <p class="copyright">Copyright 2020 - SporTun</p>
+        <p class="copyright">Copyright 2022 - naja7ni</p>
     </div>
 </div>
  <!-------js for toggle menu -------->

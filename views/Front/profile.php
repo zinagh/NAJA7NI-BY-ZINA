@@ -192,7 +192,7 @@ $(".tab").click(function() {
                 </div>
             </div>
             <hr>
-            <p class="copyright">Copyright 2020 - SporTun</p>
+            <p class="copyright">Copyright 2022 - naja7ni</p>
         </div>
     </div>
 

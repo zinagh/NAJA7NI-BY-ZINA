@@ -456,7 +456,7 @@
             <div id="content">
                 <img src="assets/img/cart.png" class="cart" alt="">
             </div>
-            <?php include "C://wamp64/www/SporTun/controller/ArticleC.php";
+            <?php include "C://wamp64/www/naja7ni/controller/ArticleC.php";
 
             $article = null;
             $articleC = new articleC();
@@ -478,7 +478,7 @@
 <div class="barre">
                 <nav>
                     <ul>
-   <h1> TEXTE SPORTUN</h1>
+   <h1> TEXTE NAJA7NI</h1>
                     </ul>
                 </nav>
             </div>
@@ -565,7 +565,7 @@ btnscrolltotop.addEventListener("click", function () {
 <div class="row">
 <div class="col">
     <p class="lead text-center">
-        Copyright &copy; <span id="year"></span> SPORTUN
+        Copyright &copy; <span id="year"></span> NAJA7NI
     </p>
 </div>
 </div>

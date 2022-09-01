@@ -1,4 +1,4 @@
-<?php require_once "C://wamp64/www/SporTun/controller/ArticleC.php" ?>
+<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>NAJA7NI_Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -59,17 +59,13 @@
                             <li>
                                 <a href="gestionannonces.html">
                                     <i class="fas fa-bullhorn"></i>
-                                    <span class="bot-line"></span>Gestion des annonces</a>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
                             </li>
-                            <li>
-                                <a href="gestionbillets.html">
-                                    <i class="fas fa-tag"></i>
-                                    <span class="bot-line"></span>Gestion des billets</a>
-                            </li>
+                       
                             <li class="has-sub">
                                 <a href="gestionactualites.php">
                                     <i class="fas fa-list-alt"></i>
-                                    <span class="bot-line"></span>Gestion des actualités</a>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
 
                             </li>
                             <li class="has-sub">
@@ -78,12 +74,7 @@
                                     <span class="bot-line"></span>Gestion des comptes</a>
 
                             </li>
-                            <li class="has-sub">
-                                <a href="gestioncomptes.php">
-                                    <i class="fas fa-user"></i>
-                                    <span class="bot-line"></span>Gestion des publicités</a>
-
-                            </li>
+              
                         </ul>
                     </div>
                     <div class="header__tool">

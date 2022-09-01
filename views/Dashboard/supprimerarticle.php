@@ -1,5 +1,5 @@
 <?php
-include "C://wamp64/www/SporTun/controller/ArticleC.php";
+include "C://wamp64/www/naja7ni/controller/ArticleC.php";
 
 $articles = new articleC();
 

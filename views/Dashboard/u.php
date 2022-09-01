@@ -1,16 +1,19 @@
 <?php
 include 'DBconnection.php';
-$query = "SELECT COUNT(postCategory) as nbrtn FROM article WHERE postCategory = 'Tennis'";
-$sql = "SELECT COUNT(postCategory) as nbrfb FROM article WHERE postCategory = 'FootBall'";
-$sql1 = "SELECT COUNT(postCategory) as nbrhb FROM article WHERE postCategory = 'HandBall'";
-$sql2 = "SELECT COUNT(postCategory) as nbrath FROM article WHERE postCategory = 'Athlétisme'";
-$sql3 = "SELECT COUNT(postCategory) as nbrcyc FROM article WHERE postCategory = 'Cyclisme'";
+$query = "SELECT COUNT(postCategory) as nbrtn FROM article WHERE postCategory = 'POO'";
+$sql = "SELECT COUNT(postCategory) as nbrfb FROM article WHERE postCategory = 'PHP'";
+$sql1 = "SELECT COUNT(postCategory) as nbrhb FROM article WHERE postCategory = 'JAVA'";
+$sql2 = "SELECT COUNT(postCategory) as nbrath FROM article WHERE postCategory = 'JAVASCRIPT'";
+$sql3 = "SELECT COUNT(postCategory) as nbrcyc FROM article WHERE postCategory = 'HTML'";
+$sql4 = "SELECT COUNT(postCategory) as nbrp FROM article WHERE postCategory = 'PYTHON'";
 
 $result=mysqli_query($conn,$sql);
 $result1=mysqli_query($conn,$query);
 $result2=mysqli_query($conn,$sql1);
 $result3=mysqli_query($conn,$sql2);
 $result4=mysqli_query($conn,$sql3);
+$result5=mysqli_query($conn,$sql4);
+
 ?>
 <html>
   <head>
@@ -37,17 +40,19 @@ $result4=mysqli_query($conn,$sql3);
                             {   
                                 ?>
 
-          ['Task', 'Nombres articles par catégories'],
-          ['FOOTBALL',     <?php echo $rows['nbrfb']; ?>],
-          ['TENNIS',      <?php echo $nbrart;?>],
-          ['HANDBALL',  <?php echo $nbrhb;?>],
-          ['ATHLETISME', <?php echo $nbrath;?>],
-          ['CYCLISME',    <?php echo $nbrcyc;?>]
+          ['Task', 'Nombres des curses par catégories'],
+          ['POO',     <?php echo $rows['nbrfb']; ?>],
+          ['PHP',      <?php echo $nbrart;?>],
+          ['JAVA',  <?php echo $nbrhb;?>],
+          ['JAVASCRIPT', <?php echo $nbrath;?>],
+          ['HTML',    <?php echo $nbrcyc;?>]
+          ['PYTHON',    <?php echo $rows['nbrp'];?>]
+
           <?php }?>
         ]);
 
         var options = {
-          title: 'Nombres articles par catégories',
+          title: 'Nombres curses par catégories',
           is3D: true,
         };
 

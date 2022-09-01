@@ -47,7 +47,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/logo.ico">
-    <title>SporTun</title>
+    <title>NAJA7NI</title>
     <link rel="stylesheet" href="../Front/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="../front/assets/img/logo.ico">
