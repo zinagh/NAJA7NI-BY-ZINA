@@ -1,20 +1,51 @@
-<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
-<?php
-session_start();
-// Page was not reloaded via a button press
-if (!isset($_POST['add1'])) {
-    $_SESSION['attnum1'] = 0; // Reset counter
-}
-if (!isset($_POST['add2'])) {
-    $_SESSION['attnum2'] = 0; // Reset counter
-}
+<?php include_once 'C://wamp64/www/naja7ni/controller/QuizC.php';
+include_once 'C://wamp64/www/naja7ni/model/Quiz.php';
 
+$error = "";
+
+    // create user
+    $art = null;
+
+    // create an instance of the controller
+    $artC = new quizC();
+    if (
+        isset($_POST["question"]) && 
+        isset($_POST["opt1"]) &&
+        isset($_POST["opt2"]) && 
+        isset($_POST["opt3"]) && 
+        isset($_POST["opt4"]) &&
+        isset($_POST["answer"])&&
+        isset($_POST["course"])
+    ) {
+        if (
+            !empty($_POST["question"]) && 
+            !empty($_POST["opt1"]) &&
+            !empty($_POST["opt2"]) && 
+            !empty($_POST["opt3"]) && 
+            !empty($_POST["opt4"]) &&
+            !empty($_POST["answer"])&&
+            !empty($_POST["course"])
+        ) {
+            $art = new quiz(
+                $_POST["question"],
+                $_POST["opt1"],
+                $_POST["opt2"],
+                $_POST["opt3"],
+                $_POST["opt4"],
+                $_POST["answer"],
+                $_POST["course"]
+            );
+            $artC->ajouterQuiz($art);
+            header('Location:../Dashboard/gestionannonces.php');
+        }
+        else
+            $error = "Missing information";
+    }
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
     <!-- Required meta tags-->
@@ -25,35 +56,37 @@ if (!isset($_POST['add2'])) {
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>NAJA7NI</title>
 
-    <!-- Fontfaces CSS-->
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> 
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+<!-- Bootstrap CSS-->
+<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+<!-- Vendor CSS-->
+<link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+<link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+<link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+<link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+<link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-    <!-- Main CSS-->
-    <link href="css/styles.css" rel="stylesheet" media="all">
-    <link href="css/css.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
-    <link href="icon.css" rel="stylesheet">
+<!-- Main CSS-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+<link href="css/styles.css" rel="stylesheet" media="all">
+<link href="css/css.css" rel="stylesheet" media="all">
+<link href="icon.css" rel="stylesheet" media="all">
 
 </head>
 
-<body id="page-top">
 <body>
     <!-- HEADER DESKTOP-->
     <header class="header-desktop3 d-none d-lg-block">
@@ -77,11 +110,7 @@ if (!isset($_POST['add2'])) {
                                 <i class="fas fa-bullhorn"></i>
                                 <span class="bot-line"></span>Gestion des annonces</a>
                         </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
+                  
                         <li class="has-sub">
                             <a href="gestionactualites.php">
                                 <i class="fas fa-list-alt"></i>
@@ -459,191 +488,59 @@ if (!isset($_POST['add2'])) {
         </div>
     </div>
     <!-- END HEADER MOBILE -->
+    <div class="container-fluid">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-     
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div>
-                        <?PHP
-                        $articleC = new articleC();
-                        if ($_SESSION['attnum1'] > $_SESSION['attnum2']) {
-
-                            $listearticle = $articleC->sortdate1();
-                        } else if ($_SESSION['attnum1'] < $_SESSION['attnum2']) {
-                            $listearticle = $articleC->sortdate2();
-                        } else {
-                            $listearticle = $articleC->afficherarticle();
-                        }
-                        $nbrC = new articleC();
-                        $nbr = $nbrC->affichernbrearticle();
-                        $limit=8;
-                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                        
-                        foreach ($nbr as $row) {
-                            
-                           $total = $row['nbrart'] ;   } 
-                            $pages = ceil( $total / $limit );
-                        
-                            $Previous = $page - 1;
-                            $Next = $page + 1;
-                        
-                        ?>
-                                                <!--  <table border=1 align='center'>
-                            <tr>
-                                <th>Id</th>
-                                <th>titre</th>
-                                <th>texte</th>
-                                <th>auteur</th>
-                                <th>source</th>
-                                <th>urlImage</th>
-                                <th>notifcreateur</th>
-                            </tr>  -->
-
-
-
-                            <div class="barre">
-                <nav>
-                    
-                </nav>
-            </div>
-
-
-                            <table>
-                            <thead>
-                                <tr>
-                                <th>
-                                        <form method='post'>
-                                            <input name='add1' type="submit" value='OrderAsc' class="btn btn-success">
-                                            <?php $_SESSION['attnum1']++; ?>
-                                        </form>
-                                    </th>
-                                    <th>
-                                        <form method='post'>
-                                            <input name='add2' type="submit" value='OrderDesc' class="btn btn-success">
-                                            <?php $_SESSION['attnum2']++; ?>
-                                        </form>
-                                    </th>
-                                </tr>
-                            </thead>
-                            </table>
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Titre</th>
-                                    <th scope="col">Texte</th>
-                                    <th scope="col">Auteur</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Notification</th>
-                                    <th scope="col">Datearticle</th>
-                                    <th scope="col">Catégorie</th>
-                                    <th scope="col">SUPPRIMER</th>
-                                    <th scope="col">MODIFIER</th>
-                                </tr>
-                            </thead>
-
-
-
-                            <?PHP
-
-$nbre=0;
-foreach ($listearticle as $row) {
-    if ( $row['postCategory']=="JAVA") $path='java.jpg';
-    if ( $row['postCategory']=="PHP") $path='php.jpg';
-    if ( $row['postCategory']=="HTML") $path='html.jpg';
-    if ( $row['postCategory']=="JAVASCRIPT") $path='js.jpg';
-    if ( $row['postCategory']=="POO") $path='poo.jpg';
-    if ( $row['postCategory']=="PYTHON") $path='python.jpg';
-
-                            ?>
-                                <tr class="table-primary">
-                                    <td><?PHP echo $row['idNewsArticle']; ?></td>
-                                    <td><?PHP echo $row['titre']; ?></td>
-                                    <td>
-                                        <a class="btn btn-primary" href="affichertexte.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Afficher TEXTE</a>
-                                    </td>
-                                    <td><?PHP echo $row['auteur']; ?></td>
-                                    <td><img width="100" src="../Dashboard/images/<?PHP echo $path; ?> "> </td>
-                                    <td><?PHP echo $row['notifCreateur']; ?></td>
-                                    <td><?PHP echo $row['Datearticle']; ?></td>
-                                    <td><?PHP echo $row['postCategory']; ?></td>
-
-                                    <td>
-                                        <form method="POST" action="../../controller/supprimerarticle.php">
-                                            <input type="submit" name="supprimer" value="supprimer" class="btn btn-danger">
-                                            <input type="hidden" value=<?PHP echo $row['idNewsArticle']; ?> name="idNewsArticle">
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" href="modifierarticles.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Modifier </a>
-                                    </td>
-                                </tr>
-                               <?php $nbre++; ?>
-                                
-                            <?PHP
-                            }
-                            ?>
-                            <div class="barre">
-                    <ul>
-   <h1>     <?php
-                        echo "NOMBRES DES ARTICLES: " . $nbre . "<br />\n";?></h1>
-                    </ul>
-            </div>
-                      
-                        </table>
-                        <?php  $auteurC = new articleC();
-                         $nombre = $auteurC->affichernbreauteur();
-                            ?>
-                            <?php
-                            foreach ($nombre as $row) {
-                            ?>
-                                                                <td><?PHP echo "NOMBRES DES AUTEURS: " . $row['nbr'] ; ?></td> <?php } ?>
-
-                    </div>
-
-                </div>
-    <ul class="pagination">
-    <li>
-        <?php if ($Previous > 0) :?>
-      <a href="afficherarticle.php?page=<?= $Previous; ?>" classe="prev" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-      <?php endif;?>
-    </li>
-    <?php for($i = 1; $i<= $pages; $i++) : ?>
-        <li classe="pageNumber"><a href="afficherarticle.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-    <?php endfor; ?>
-    <li>
-    <?php if ($Next <= $pages) :?>
-      <a href="afficherarticle.php?page=<?= $Next; ?>" classe="next" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-      <?php endif;?>
-    </li>
-  </ul>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
+<div>
+    <form action="" method="post">
+    <div class="form-group">
+        <br><br><br>
+        <label for="question">Question</label>
+        <input type="text" class="form-control" id="question" name="question">
     </div>
-    <!-- End of Page Wrapper -->
+    <div class="form-group">
+        <label for="opt1">Opt1</label>
+        <input type="text" class="form-control" id="opt1" name="opt1" >
+    </div>
+    <div class="form-group">
+        <label for="opt2">Opt2</label>
+        <input type="text" class="form-control" id="opt2" name="opt2">
+    </div>
+    <div class="form-group">
+        <label for="opt3">Opt3</label>
+        <input type="text" class="form-control" id="opt3" name="opt3">
+    </div>
+    <div class="form-group">
+        <label for="opt4">Opt4</label>
+        <input type="text" class="form-control" id="opt4" name="opt4">
+    </div>
+    <div class="form-group">
+        <label for="answer">Answer</label>
+        <input type="text" class="form-control" id="answer" name="answer">
+    </div>
+    <div class="form-group">
+              <label for="course">Course</label>
+              <select class="form-control1" id="course" name="course">
+                <option selected="selected">Choose One...</option>
+                <option>POO</option>
+                <option>PHP</option>
+                <option>JAVA</option>
+                <option>JAVASCRIPT</option>
+                <option>HTML</option>
+                <option>PYTHON</option>
 
-   <!-- Scroll to Top Button-->
+              </select>
+    </div>
+ 
+    </div>
+    </div>
+    <br><br>
+    <button class="btn btn-prim" data-dismiss="modal" type="submit" name="signup_submit">Ajouter</button>
+    <button class="btn btn-pr" data-dismiss="modal" type="reset" name="signup_submit">Annuler</button>
+    <br><br><br><br>
+
+</form>
+
+ <!-- Scroll to Top Button-->
 <button id="btnscrolltotop">
         <i class="material-icons">arrow_circle_up</i>
     </button>
@@ -660,26 +557,7 @@ btnscrolltotop.addEventListener("click", function () {
     });
 });
 </script>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+ 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -689,8 +567,9 @@ btnscrolltotop.addEventListener("click", function () {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-     <!-- FOOTER -->
-     <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
+    
+    <!-- FOOTER -->
+    <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -701,7 +580,5 @@ btnscrolltotop.addEventListener("click", function () {
             </div>
         </div>
     </footer>
-
-</body>
-
+    </body>
 </html>

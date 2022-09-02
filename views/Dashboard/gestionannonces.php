@@ -1,4 +1,5 @@
-<?php
+<?php include_once 'C://wamp64/www/naja7ni/controller/QuizC.php';
+include_once 'C://wamp64/www/naja7ni/model/Quiz.php';
 include 'DBconnection.php';
 session_start();
 if (!isset($_SESSION["emailadmin"]))
@@ -12,71 +13,66 @@ if (!isset($_SESSION["emailadmin"]))
     $compte=$row['nom'].' '.$row['prenom'];
 
 
-/***********js error msg********/
-$error="";
+$error = "";
 
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    }else{
-        $id = 0;
+    // create user
+    $art = null;
+
+    // create an instance of the controller
+    $artC = new quizC();
+    if (
+        isset($_POST["question"]) && 
+        isset($_POST["opt1"]) &&
+        isset($_POST["opt2"]) && 
+        isset($_POST["opt3"]) && 
+        isset($_POST["opt4"]) &&
+        isset($_POST["answer"])&&
+        isset($_POST["course"])
+    ) {
+        if (
+            !empty($_POST["question"]) && 
+            !empty($_POST["opt1"]) &&
+            !empty($_POST["opt2"]) && 
+            !empty($_POST["opt3"]) && 
+            !empty($_POST["opt4"]) &&
+            !empty($_POST["answer"])&&
+            !empty($_POST["course"])
+        ) {
+            $art = new quiz(
+                $_POST["question"],
+                $_POST["opt1"],
+                $_POST["opt2"],
+                $_POST["opt3"],
+                $_POST["opt4"],
+                $_POST["answer"],
+                $_POST["course"]
+            );
+            $artC->ajouterQuiz($art);
+            //header('Location:afficherUtilisateurs.php');
+        }
+        else
+            $error = "Missing information";
     }
-
-
-if(isset($_GET['choix'])){
-    $choix = $_GET['choix'];
-    }else{
-        $choix = 0;
-    }
-
-/***** statistics ******/
-
-if($choix==0){
-    $total='nombre total de demandes de vente:';
-    $table='demandesdevente';
-}
-
-if($choix==1){
-    $total='nombre total de produits en vente:';
-    $table='miseenvente';
-
-}
-
-
-
-
-
-
-if($choix!=2){
-
-mysqli_query($conn,"DELETE FROM $table WHERE id='".$id."'");
-$sql="select * from $table;";
-
-
-
-//mysqli_close($conn);
-
-$result=mysqli_query($conn,$sql);
-$NbAnnonces=mysqli_num_rows($result);
-}
-
-
-
-
-
-
 ?>
 
-
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
 
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../front/assets/img/logo.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>gestion des produits</title>
+    <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
@@ -84,27 +80,23 @@ $NbAnnonces=mysqli_num_rows($result);
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-
     <link href="css/styles.css" rel="stylesheet" media="all">
-
-    <link rel="shortcut icon" href="../front/assets/img/logo.ico">
-
-    <?php if($choix==2){
-    echo"<link href='../Front/style.css' rel='stylesheet' media='all'>";
-    }
-    ?>
-
-
-    
-
-
-    <script src="../../controller/AjouterAnnonce1.js"> </script>
+    <link href="css/css.css" rel="stylesheet" media="all">
+    <link href="icon.css" rel="stylesheet">
+    <link href="charts.css" rel="stylesheet">
 
 
 </head>
+
 <body>
  <div class="page-wrapper">
         <!-- HEADER DESKTOP-->
@@ -118,19 +110,25 @@ $NbAnnonces=mysqli_num_rows($result);
                     </div>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
+                        <li class="has-sub">
+                            <a href="index.php">
+                                <i class="fas fa-home"></i>Acceuil
+                                <span class="bot-line"></span>
+                            </a>
+                        </li>
                             <li>
-                                <a href="gestionannonces.php">
-                                    <i class="fas fa-bullhorn"></i>
+                                <a href="gestionbillets.php">
+                                    <i class="fas fa-tag"></i>
                                     <span class="bot-line"></span>Gestion des Quiz</a>
-                            </li>
-                     
+                            </li> 
+                          
                             <li class="has-sub">
                             <a href="gestionactualites.php">
                                     <i class="fas fa-list-alt"></i>
                                     <span class="bot-line"></span>Gestion des Cours</a>
                             
                             </li>
-                         
+                        
                             <li class="has-sub">
                                 <a href="gestioncomptes.php">
                                     <i class="fas fa-user"></i>
@@ -184,339 +182,180 @@ $NbAnnonces=mysqli_num_rows($result);
                 </div>
             </div>
         </header>
-        <!-- END HEADER DESKTOP-->
 
-    
-        <!-- PAGE CONTENT-->
-        <?php if($choix!=2){?>
-            
-                <?php
-                if($NbAnnonces==0){
-                ?>
-
-
-                                
-                                </br></br></br></br></br>
-                                <h2 style='text-align:center;'> Aucune annonce trouvée!</h2>
-                                </br></br></br>
-                        <?php
-                        }else{
-                        ?>
-                                
-                                <div class='page-content--bgf7'>
-                                <br><br><br>
-
-                                
-
-
-                                    <div class=choose-btn>
-                                        <div>
-                                            <?php if($choix==0){
-                                            echo "<a href='gestionannonces.php?choix=0' class='button button5 active'  > <strong>Demandes de vente</strong> </a>";
-                                            }else{
-                                            echo "<a href='gestionannonces.php?choix=0' class='button button5 '  > <strong>Demandes de vente</strong> </a>";
-                                            }
-                                            ?>
-                                        </div>
-                                        <div>
-                                            <?php if($choix==1){
-                                            echo "<a href='gestionannonces.php?choix=1' class='button button5 active'  > <strong>Produits en vente</strong> </a>";
-                                            }else{
-                                            echo "<a href='gestionannonces.php?choix=1' class='button button5 '  > <strong>Produits en vente</strong> </a>";
-                                            }
-                                            ?>
-                                        </div>
-                                        <div>
-
-                                            <a href="gestionannonces.php?choix=2" class="button button5"  id=<?php echo 'button button5'; ?> > <strong>Mettre en vente</strong> </a>
-
-
-                                        </div>
-
-
-                                    </div>
-
-
-
-                                    <div class='stat'>
-                                        <div class='title'>
-                                            <h4><?php echo $total; ?></h4>
-                                            <?php echo "<p>$NbAnnonces</p>" ?>
-                                        </div>
-
-
-                                    </div>
-
-
-
-
-                                <br><br><br>
-                                    <div class='container'>
-                                    <div class='row'>
-                                    <div class='col-md-12'>
-                                    </div>
-                                    
-                                <div class='table-responsive table-responsive-data2'>
-                                <table class='table table-data2'>
-                                        <thead>
-                                            <tr>
-                                                <th>Titre</th>
-                                                <th>Description</th>
-                                                <th>Categories</th>
-                                                <th>Image</th>
-                                                <th>Prix</th>
-                                                <?php
-                                                if($choix==0){ 
-                                                echo "<th> emplacement </th>";
-                                                echo "<th> email </th>";
-                                                echo "<th> numTel </th>";
-                                                }?>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                            <?php
-                            while($rows=mysqli_fetch_assoc($result))
-                            {
-                            $id=$rows['id'];
+    <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--blue">
+                                <h2 class="number"><?php  $artC = new quizC();
+                         $nbre = $artC->affichernbreqt();
                             ?>
-
-                            <tr class="tr-shadow">
-
-                                <td><?php echo $rows['titre']; ?></td>
-                                <td><?php echo $rows['description']; ?></td>
-                                <td><?php echo $rows['categorie']; ?></td>
-                                <td><?php echo "<a href=imagesproduit.php?id=$id&choix=$choix> <img src='../Front/assets/img/".$rows['image1']."' style='width:150px' >"; ?></td>
-                                <td><?php echo $rows['prix']; ?></td>
-                                <?php
-                                if($choix==0){ 
-                                echo "<td> ".$rows['emplacement']." </td>";
-                                echo "<td> ".$rows['email']." </td>";
-                                echo "<td> ".$rows['numtel']." </td>";
-                                }?>
-
-
-                                <td>
-
-
-                                    <div class="table-data-feature">
-                                    <?php $id=$rows['id'];?>
-                                    <?php echo"<a href='gestionannonces.php?choix=$choix&id=$id'>
-                                                <button class='item' data-toggle='tooltip' data-placement='top' title='Supprimer'>
-                                                    <i class='zmdi zmdi-delete'></i>
-                                                </button>
-                                               </a>"; ?>
-                                    </div>
-                                </td>
-
-                            </tr>
-
                             <?php
-                            }
-                            }
-                            
+                            foreach ($nbre as $row) {
                             ?>
-
-                            <tr class="spacer"></tr>
-                            
-
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <?php
-        }else{
-    /*********************page ajouter produit (choix==2)************************/
-    ?>
-
-    <div class='page-content--bgf7'>
-    <br><br><br>
-
-
-
-    <div class=choose-btn>
-    <div>
-    <a href="gestionannonces.php?choix=0" class="button button5"> <strong>Demandes de vente</strong> </a>
-    </div>
-    <div>
-    <a href="gestionannonces.php?choix=1" class="button button5"> <strong>Produits en vente</strong> </a>
-    </div>
-    <div>
-    <a href="gestionannonces.php?choix=2" class="button button5 active"> <strong>Mettre en vente</strong> </a>
-    </div>
-    </div>
-
-
-
-    <div class="account-page">
-        <div class="container">
-
-
-        <?php
-
-        if (isset($_GET["msg"]))
-        {
-        $msg=$_GET["msg"];
-        }
-        else{
-        $msg='';
-        }
-
-        if ($msg!='')
-        {
-        ?>
-            <div style="text-align:center;">
-            <br><br><br>
-            
-            <p style="color :green; font-size: 25px; " ><?php echo $msg ?> </p>
-            
-            <a href='gestionannonces.php?choix=2' class='btn paniervide-btn'>Publier Un Autre Produit  </a>
-            
-            <br><br><br><br><br><br><br><br>
-
-            </div>
-        <?php
-        }
-        else
-        { 
-        ?>
-
-
-            <div class="row">
-                    <div class="vendreproduit-container">
-                        <form action="../../controller/AjouterAnnonce1.php" method="POST" id="AnnForm" name="f1" enctype="multipart/form-data">
-                            <label for="titre">Titre</label>
-                            <input type="text" name="titre" id="titre" placeholder="Saisissez un titre descriptif">
-                            </br></br>
-                            <label for="description">Description</label>
-                            </br>
-                            <textarea name="description" id="description" placeholder=" Description" cols="70" rows="5"></textarea>
-                            </br></br>
-
-                            <label for="cars">Catégorie</label>
-                            </br>
-                            <select name="categorie" id="categorie">
-                                <option value="Sélectionner">Sélectionner</option>
-                                <option value="Equitation">EQUITATION</option>
-                                <option value="Fitness Muscu">FITNESS MUSCU</option>
-                                <option value="Cyclisme">CYCLISME</option>
-                                <option value="Golf">GOLF</option>
-                                <option value="Nautique">NAUTIQUE</option>
-                                <option value="Autre">AUTRE</option>
-
-                            </select>
-                            </br></br>
-                            <label for="photos">Photos (5 maximum)</label>
-
-                            <div class="user-image mb-3 text-center">
-                                <div class="imgGallery"> 
-                                  <!-- Image preview -->
+                                                                <td><?PHP echo $row['nbri'] ; ?></td> <?php } ?></h2>
+                                <span class="desc">Nombres Des Examens</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
                             </div>
-
-                            <div class="custom-file">
-                                <input type="file" name="fileUpload[]" class="customfile-input" id="chooseFile" multiple>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number"> <?php  $qC = new quizC();
+                         $nombre = $qC->affichernbrecrs();
+                            ?>
+                            <?php
+                            foreach ($nombre as $row) {
+                            ?>
+                                                                <td><?PHP echo $row['nbrart'] ; ?></td> <?php } ?>
+</h2>
+                                <span class="desc">Nombres Des Questions</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
                             </div>
-                            </br></br>
-                            <label for="prix">Prix (TND)</label>
-                            <input type="number" name="prix" placeholder="prix">
-                            </br></br>
-                            </br>
-                            
-
-                            </br>
-                            <p style="color: rgb(255, 0, 0);" id="erreur"></p>
-                            <br>
-                            <button type="submit" name="submit" class="btn" value="AnnForm" onclick="return verif()">Ajouter le produit</button>
-                             
-                        </form>
-
-
-    
+                        </div>
                     </div>
+                </div>
+            </section>
     
-    
+    <!-- ACTIONS -->
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="ajouterquiz.php" class="btn btn-primary btn-block" >
+                        <i class="fas fa-plus"></i> Ajouter Questions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POSTS -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9" id="postParent">
+                    <div class="card" id="postContainer">
+                        <div class="card-header">
+                            <h4>3 derniers Participant</h4>
+                        </div>
+                        
+                                
+                                <tbody id="latestPosts"> 
+                                      <?php require_once "Latest qst.php" ?>
+                                </tbody>
+                            
+                         
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card text-center bg-primary text-white mb-3">
+                        <div class="card-body">
+                            <h3>Posts</h3>
+                            <!-- Added ID for JS -->
+                            <h4 class="display-4" id="postCount">
+                                <i class="fas fa-pencil-alt"></i>
+                            </h4>
+                            <a href="affichequiz.php" class="btn btn-outline-light btn-sm">View</a>
+                        </div>
+
+                    </div>
+                    <div class="card text-center bg-warning text-white mb-3">
+                        <div class="card-body">
+                            <h3>STATISTIQUES</h3>
+                            <h4 class="display-4">
+                                <i class="fas fa-users"></i> 4
+                            </h4>
+                            <a href="statuser.php" class="btn btn-outline-light btn-sm">View</a>
+                        </div> 
+
                     </div>
                 </div>
             </div>
         </div>
-        <?php } ?>
+    </section>
+     <!-- Scroll to Top Button-->
+     <a class="btnscrolltotop" href="#page-top">
+        <i class="material-icons">arrow_circle_up</i>
+    </a>
+    <div class="col-md-9 col-lg-6">
+                            
+                            <div class="col-md-9" id="postParent">
+                    <div class="card" id="postContainer">
+                        <div class="card-header">
+                            <h4>GRAPHE</h4>
+                        </div>
+                        
+                                
+                                <tbody id="latestPosts"> 
+                                <!-- CHART PERCENT-->
+                                <?php require_once "u.php" ?>
+                            <!-- END CHART PERCENT-->
+                            <?php require_once "u1.php" ?>
+                                </tbody>
+                            
+                         
+                    </div>
+                </div>
+<br><br>
+                        </div>
+    <!-- FOOTER -->
+    <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="lead text-center">
+                        Copyright &copy; <span id="year"></span> NAJA7NI
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <!-- MODALS -->
+
+    <!-- ADD POST MODAL -->
+    <div class="modal fade" id="addPostModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Add Post</h5>
+                    <button class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+     
+                <?php require_once "ajouterarticle.php" ?>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
 
 
 
-
-
-
-
-        <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- WYSWYG Editor -->
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 
     <script>
-        $(function() {
-        // Multiple images preview with JavaScript
-        var multiImgPreview = function(input, imgPreviewPlaceholder) {
-
-            if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(event) {
-                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-
-        };
-
-        $('#chooseFile').on('change', function() {
-            multiImgPreview(this, 'div.imgGallery');
-        });
-        });    
+        // Get the current year for the copyright
+        $('#year').text(new Date().getFullYear());
+        // Modal Editor
+        CKEDITOR.replace('editor1');
     </script>
-
-    <!-------js for toggle menu -------->
-    <script>
-        var MenuItems= document.getElementById("MenuItems");
-        MenuItems.style.maxHeight="0px";
-        function togglemenu(){
-            if (MenuItems.style.maxHeight =="0px") {
-                MenuItems.style.maxHeight ="280px";
-            }
-            else
-            {
-                MenuItems.style.maxHeight ="0px";
-            }
-        }
-    </script>
-                                    
-
-
-
-
-
-
-
-<?php
-        }
-
-?>
-
-    
-
-                <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Local JS -->
+    <script src="js/app.js"></script>
+    <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -525,13 +364,12 @@ $NbAnnonces=mysqli_num_rows($result);
     <script src="vendor/animsition/animsition.min.js"></script>
 
     
+   
+   
+    
+    
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-
-
-
-
-
 </body>
 </html>

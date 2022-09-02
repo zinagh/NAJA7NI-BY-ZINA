@@ -1,8 +1,8 @@
 <?php
 include 'DBconnection.php';
-$query = "SELECT COUNT(postCategory) as nbrtn FROM article WHERE postCategory = 'POO'";
-$sql = "SELECT COUNT(postCategory) as nbrfb FROM article WHERE postCategory = 'PHP'";
-$sql1 = "SELECT COUNT(postCategory) as nbrhb FROM article WHERE postCategory = 'JAVA'";
+$query = "SELECT COUNT(postCategory) as nbrpoo FROM article WHERE postCategory = 'POO'";
+$sql = "SELECT COUNT(postCategory) as nbrphp FROM article WHERE postCategory = 'PHP'";
+$sql1 = "SELECT COUNT(postCategory) as nbrjv FROM article WHERE postCategory = 'JAVA'";
 $sql2 = "SELECT COUNT(postCategory) as nbrath FROM article WHERE postCategory = 'JAVASCRIPT'";
 $sql3 = "SELECT COUNT(postCategory) as nbrcyc FROM article WHERE postCategory = 'HTML'";
 $sql4 = "SELECT COUNT(postCategory) as nbrp FROM article WHERE postCategory = 'PYTHON'";
@@ -25,10 +25,10 @@ $result5=mysqli_query($conn,$sql4);
         var data = google.visualization.arrayToDataTable([
           <?php 
           while($rows=mysqli_fetch_assoc($result1))
-          { $nbrart= $rows['nbrtn']; 
+          { $nbrart= $rows['nbrpoo']; 
              }
              while($rows=mysqli_fetch_assoc($result2))
-             { $nbrhb= $rows['nbrhb']; 
+             { $nbrhb= $rows['nbrjv']; 
                 }
                 while($rows=mysqli_fetch_assoc($result3))
                 { $nbrath= $rows['nbrath']; 
@@ -36,17 +36,20 @@ $result5=mysqli_query($conn,$sql4);
                    while($rows=mysqli_fetch_assoc($result4))
                 { $nbrcyc= $rows['nbrcyc']; 
                    }
+                   while($rows=mysqli_fetch_assoc($result5))
+                   { $nbrp= $rows['nbrp']; 
+                      }
                             while($rows=mysqli_fetch_assoc($result))
                             {   
                                 ?>
 
           ['Task', 'Nombres des curses par catégories'],
-          ['POO',     <?php echo $rows['nbrfb']; ?>],
-          ['PHP',      <?php echo $nbrart;?>],
+          ['PHP',     <?php echo $rows['nbrphp']; ?>],
+          ['POO',      <?php echo $nbrart;?>],
           ['JAVA',  <?php echo $nbrhb;?>],
           ['JAVASCRIPT', <?php echo $nbrath;?>],
-          ['HTML',    <?php echo $nbrcyc;?>]
-          ['PYTHON',    <?php echo $rows['nbrp'];?>]
+          ['HTML',    <?php echo $nbrcyc;?>],
+          ['PYTHON',    <?php echo $nbrp;?>]
 
           <?php }?>
         ]);

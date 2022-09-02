@@ -1,62 +1,92 @@
-<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
 <?php
-session_start();
-// Page was not reloaded via a button press
-if (!isset($_POST['add1'])) {
-    $_SESSION['attnum1'] = 0; // Reset counter
-}
-if (!isset($_POST['add2'])) {
-    $_SESSION['attnum2'] = 0; // Reset counter
-}
+include "../../controller/ArticleC.php";
+include_once "../../model/Articles.php";
 
+
+$articleC = new articleC();
+$error = "";
+if (
+    isset($_POST["titre"]) &&
+    isset($_POST["texte"]) &&
+    isset($_POST["auteur"]) &&
+    isset($_POST["urlImage"]) &&
+    isset($_POST["notifCreateur"]) &&
+  //  isset($_POST["Datearticle"]) &&
+    isset($_POST["postCategory"])
+) {
+    if (
+        !empty($_POST["titre"]) &&
+        !empty($_POST["texte"]) &&
+        !empty($_POST["auteur"]) &&
+        !empty($_POST["urlImage"]) &&
+        isset($_POST["notifCreateur"]) &&
+      //  isset($_POST["Datearticle"]) &&
+        isset($_POST["postCategory"])
+    ) {
+        $article = new article(
+            $_POST['titre'],
+            $_POST['texte'],
+            $_POST['auteur'],
+            $_POST['urlImage'],
+            $_POST['notifCreateur'],
+          //  $_POST['Datearticle'],
+            $_POST['postCategory']
+        );
+        $articleC->modifierarticles($article, $_GET['idNewsArticle']);
+        header('Location:../Dashboard/gestionactualites.php');
+    } else
+        echo "Missing information";
+}
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- Title Page-->
     <title>Dashboard</title>
-
-    <!-- Fontfaces CSS-->
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> 
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+<!-- Bootstrap CSS-->
+<link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+<!-- Vendor CSS-->
+<link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+<link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+<link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+<link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+<link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-    <!-- Main CSS-->
-    <link href="css/styles.css" rel="stylesheet" media="all">
-    <link href="css/css.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
-    <link href="icon.css" rel="stylesheet">
+<!-- Main CSS-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+<link href="css/styles.css" rel="stylesheet" media="all">
+<link href="css/css.css" rel="stylesheet" media="all">
+<link href="icon.css" rel="stylesheet" media="all">
+
 
 </head>
 
 <body id="page-top">
-<body>
-    <!-- HEADER DESKTOP-->
-    <header class="header-desktop3 d-none d-lg-block">
+
+  <!-- HEADER DESKTOP-->
+  <header class="header-desktop3 d-none d-lg-block">
         <div class="section__content section__content--p35">
             <div class="header3-wrap">
                 <div class="header__logo">
@@ -460,182 +490,109 @@ if (!isset($_POST['add2'])) {
     </div>
     <!-- END HEADER MOBILE -->
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
 
-     
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
-                
+               
+
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div>
-                        <?PHP
-                        $articleC = new articleC();
-                        if ($_SESSION['attnum1'] > $_SESSION['attnum2']) {
 
-                            $listearticle = $articleC->sortdate1();
-                        } else if ($_SESSION['attnum1'] < $_SESSION['attnum2']) {
-                            $listearticle = $articleC->sortdate2();
-                        } else {
-                            $listearticle = $articleC->afficherarticle();
-                        }
-                        $nbrC = new articleC();
-                        $nbr = $nbrC->affichernbrearticle();
-                        $limit=8;
-                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                        
-                        foreach ($nbr as $row) {
-                            
-                           $total = $row['nbrart'] ;   } 
-                            $pages = ceil( $total / $limit );
-                        
-                            $Previous = $page - 1;
-                            $Next = $page + 1;
-                        
-                        ?>
-                                                <!--  <table border=1 align='center'>
-                            <tr>
-                                <th>Id</th>
-                                <th>titre</th>
-                                <th>texte</th>
-                                <th>auteur</th>
-                                <th>source</th>
-                                <th>urlImage</th>
-                                <th>notifcreateur</th>
-                            </tr>  -->
+                <div id="error">
+                    <?php echo $error; ?>
+                </div>
+
+                <?php
+                if (isset($_GET['idNewsArticle'])) {
+                    $article = $articleC->recupererarticle($_GET['idNewsArticle']);
+                ?>
 
 
+                    <div class="container-fluid">
+                        <div>
+                            <form method="POST" action="">
+                                <div class="form-group">
+                                    <br><br><br>
+                                    <label for="idNewsArticle">idArticle</label>
+                                    <input type="text" class="form-control1" name="idNewsArticle" id="idNewsArticle" value="<?php echo $article['idNewsArticle']; ?>" disabled>
+                                </div>
 
-                            <div class="barre">
-                <nav>
-                    
-                </nav>
-            </div>
+                                <div class="form-group">
+                                    <label for="titre">Titre</label>
+                                    <input type="text" class="form-control" name="titre" id="titre" value="<?php echo $article['titre']; ?> ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="texte">Texte</label>
+                                    <textarea class="form-control" name="texte" rows="10"> <?php echo $article['texte']; ?>  </textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="auteur">Auteur</label>
+                                    <input type="text" class="form-control" name="auteur" value="<?php echo $article['auteur']; ?> ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="urlImage">Ajouter Image</label>
+                                    <input type="file" class="form-control-file" name="urlImage" value="<?php echo $article['urlImage']; ?> ">
+                                </div>
+
+                          <!--      <div class="form-group">
+                                    <label for="Datearticle">Datearticle</label>
+                                    <input name="Datearticle" type="date" value="<?php echo $article['Datearticle'];
+                                                                                ?>">
+                                </div>-->
+
+                                <div class="form-group">
+                                    <label for="notifCreateur">Notifications </label>
+                                    <select class="form-control1" name="notifCreateur">
+                                        <option value="1" value="<?php echo $article['notifCreateur']; ?> ">Oui</option>
+                                        <option value="0" value="<?php echo $article['notifCreateur']; ?> ">Non</option>
+                                    </select>
+                                </div>
+                              <div class="form-group">
+
+                                <label for="postCategory">Categories</label>
+              <select type="text" class="form-control1" name="postCategory" value="<?php echo $article['postCategory']; ?> " >
+              <option selected="selected"><?php echo $article['postCategory']; ?> </option>
+              <option>FootBall</option>
+                <option>Tennis</option>
+                <option>Athlétisme</option>
+                <option>HandBall</option>
+                <option>Cyclisme</option>
+              </select>
+                </div>
+
+                <div class="form-group">
+                                    <label for="idNewsArticle">VUES</label>
+                                    <input type="text" class="form-control1" name="idNewsArticle" id="idNewsArticle" value="<?php echo $article['vues']; ?>" disabled>
+                                </div>
+                                <button type="submit" value="Envoyer" class="btn btn-prim">Modifier</button>
+                                <button type="reset" value="Annuler" class="btn btn-pr">Annuler</button>
+
+                                <br><br><br>
+
+                            </form>
+                        </div>
+                        <script>
+                            CKEDITOR.replace('texte');
+                        </script>
 
 
-                            <table>
-                            <thead>
-                                <tr>
-                                <th>
-                                        <form method='post'>
-                                            <input name='add1' type="submit" value='OrderAsc' class="btn btn-success">
-                                            <?php $_SESSION['attnum1']++; ?>
-                                        </form>
-                                    </th>
-                                    <th>
-                                        <form method='post'>
-                                            <input name='add2' type="submit" value='OrderDesc' class="btn btn-success">
-                                            <?php $_SESSION['attnum2']++; ?>
-                                        </form>
-                                    </th>
-                                </tr>
-                            </thead>
-                            </table>
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Titre</th>
-                                    <th scope="col">Texte</th>
-                                    <th scope="col">Auteur</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Notification</th>
-                                    <th scope="col">Datearticle</th>
-                                    <th scope="col">Catégorie</th>
-                                    <th scope="col">SUPPRIMER</th>
-                                    <th scope="col">MODIFIER</th>
-                                </tr>
-                            </thead>
 
 
-
-                            <?PHP
-
-$nbre=0;
-foreach ($listearticle as $row) {
-    if ( $row['postCategory']=="JAVA") $path='java.jpg';
-    if ( $row['postCategory']=="PHP") $path='php.jpg';
-    if ( $row['postCategory']=="HTML") $path='html.jpg';
-    if ( $row['postCategory']=="JAVASCRIPT") $path='js.jpg';
-    if ( $row['postCategory']=="POO") $path='poo.jpg';
-    if ( $row['postCategory']=="PYTHON") $path='python.jpg';
-
-                            ?>
-                                <tr class="table-primary">
-                                    <td><?PHP echo $row['idNewsArticle']; ?></td>
-                                    <td><?PHP echo $row['titre']; ?></td>
-                                    <td>
-                                        <a class="btn btn-primary" href="affichertexte.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Afficher TEXTE</a>
-                                    </td>
-                                    <td><?PHP echo $row['auteur']; ?></td>
-                                    <td><img width="100" src="../Dashboard/images/<?PHP echo $path; ?> "> </td>
-                                    <td><?PHP echo $row['notifCreateur']; ?></td>
-                                    <td><?PHP echo $row['Datearticle']; ?></td>
-                                    <td><?PHP echo $row['postCategory']; ?></td>
-
-                                    <td>
-                                        <form method="POST" action="../../controller/supprimerarticle.php">
-                                            <input type="submit" name="supprimer" value="supprimer" class="btn btn-danger">
-                                            <input type="hidden" value=<?PHP echo $row['idNewsArticle']; ?> name="idNewsArticle">
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" href="modifierarticles.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Modifier </a>
-                                    </td>
-                                </tr>
-                               <?php $nbre++; ?>
-                                
-                            <?PHP
-                            }
-                            ?>
-                            <div class="barre">
-                    <ul>
-   <h1>     <?php
-                        echo "NOMBRES DES ARTICLES: " . $nbre . "<br />\n";?></h1>
-                    </ul>
-            </div>
-                      
-                        </table>
-                        <?php  $auteurC = new articleC();
-                         $nombre = $auteurC->affichernbreauteur();
-                            ?>
-                            <?php
-                            foreach ($nombre as $row) {
-                            ?>
-                                                                <td><?PHP echo "NOMBRES DES AUTEURS: " . $row['nbr'] ; ?></td> <?php } ?>
 
                     </div>
-
-                </div>
-    <ul class="pagination">
-    <li>
-        <?php if ($Previous > 0) :?>
-      <a href="afficherarticle.php?page=<?= $Previous; ?>" classe="prev" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-      <?php endif;?>
-    </li>
-    <?php for($i = 1; $i<= $pages; $i++) : ?>
-        <li classe="pageNumber"><a href="afficherarticle.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-    <?php endfor; ?>
-    <li>
-    <?php if ($Next <= $pages) :?>
-      <a href="afficherarticle.php?page=<?= $Next; ?>" classe="next" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-      <?php endif;?>
-    </li>
-  </ul>
-                <!-- /.container-fluid -->
+                    <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
+
+
 
         </div>
         <!-- End of Content Wrapper -->
@@ -643,8 +600,8 @@ foreach ($listearticle as $row) {
     </div>
     <!-- End of Page Wrapper -->
 
-   <!-- Scroll to Top Button-->
-<button id="btnscrolltotop">
+    <!-- Scroll to Top Button-->
+    <button id="btnscrolltotop">
         <i class="material-icons">arrow_circle_up</i>
     </button>
 
@@ -689,8 +646,14 @@ btnscrolltotop.addEventListener("click", function () {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-     <!-- FOOTER -->
-     <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
+<?php
+                } else {
+                    echo "error ";
+                }
+?>
+</body>
+<!-- FOOTER -->
+<footer id="main-footer" class="bg-dark text-white mt-5 p-5">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -701,7 +664,4 @@ btnscrolltotop.addEventListener("click", function () {
             </div>
         </div>
     </footer>
-
-</body>
-
 </html>

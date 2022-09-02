@@ -1,4 +1,4 @@
-<?php require_once "C://wamp64/www/naja7ni/controller/ArticleC.php" ?>
+<?php require_once "C://wamp64/www/naja7ni/controller/QuizC.php" ?>
 <?php
 session_start();
 // Page was not reloaded via a button press
@@ -476,23 +476,23 @@ if (!isset($_POST['add2'])) {
                 <div class="container-fluid">
                     <div>
                         <?PHP
-                        $articleC = new articleC();
+                        $articleC = new quizC();
                         if ($_SESSION['attnum1'] > $_SESSION['attnum2']) {
 
                             $listearticle = $articleC->sortdate1();
                         } else if ($_SESSION['attnum1'] < $_SESSION['attnum2']) {
                             $listearticle = $articleC->sortdate2();
                         } else {
-                            $listearticle = $articleC->afficherarticle();
+                            $listearticle = $articleC->afficherquiz();
                         }
-                        $nbrC = new articleC();
-                        $nbr = $nbrC->affichernbrearticle();
+                        $nbrC = new quizC();
+                        $nbr = $nbrC->affichernbreqt();
                         $limit=8;
                         $page = isset($_GET['page']) ? $_GET['page'] : 1;
                         
                         foreach ($nbr as $row) {
                             
-                           $total = $row['nbrart'] ;   } 
+                           $total = $row['nbri'] ;   } 
                             $pages = ceil( $total / $limit );
                         
                             $Previous = $page - 1;
@@ -541,13 +541,13 @@ if (!isset($_POST['add2'])) {
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Titre</th>
-                                    <th scope="col">Texte</th>
-                                    <th scope="col">Auteur</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Notification</th>
-                                    <th scope="col">Datearticle</th>
-                                    <th scope="col">Catégorie</th>
+                                    <th scope="col">QUESTION</th>
+                                    <th scope="col">OPT1</th>
+                                    <th scope="col">OPT2</th>
+                                    <th scope="col">OPT3</th>
+                                    <th scope="col">OPT4</th>
+                                    <th scope="col">ANSWER</th>
+                                    <th scope="col">COURSE</th>
                                     <th scope="col">SUPPRIMER</th>
                                     <th scope="col">MODIFIER</th>
                                 </tr>
@@ -559,34 +559,25 @@ if (!isset($_POST['add2'])) {
 
 $nbre=0;
 foreach ($listearticle as $row) {
-    if ( $row['postCategory']=="JAVA") $path='java.jpg';
-    if ( $row['postCategory']=="PHP") $path='php.jpg';
-    if ( $row['postCategory']=="HTML") $path='html.jpg';
-    if ( $row['postCategory']=="JAVASCRIPT") $path='js.jpg';
-    if ( $row['postCategory']=="POO") $path='poo.jpg';
-    if ( $row['postCategory']=="PYTHON") $path='python.jpg';
-
                             ?>
                                 <tr class="table-primary">
-                                    <td><?PHP echo $row['idNewsArticle']; ?></td>
-                                    <td><?PHP echo $row['titre']; ?></td>
-                                    <td>
-                                        <a class="btn btn-primary" href="affichertexte.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Afficher TEXTE</a>
-                                    </td>
-                                    <td><?PHP echo $row['auteur']; ?></td>
-                                    <td><img width="100" src="../Dashboard/images/<?PHP echo $path; ?> "> </td>
-                                    <td><?PHP echo $row['notifCreateur']; ?></td>
-                                    <td><?PHP echo $row['Datearticle']; ?></td>
-                                    <td><?PHP echo $row['postCategory']; ?></td>
+                                    <td><?PHP echo $row['id']; ?></td>
+                                    <td><?PHP echo $row['question']; ?></td>
+                                    <td><?PHP echo $row['opt1']; ?></td>
+                                    <td><?PHP echo $row['opt2']; ?></td>
+                                    <td><?PHP echo $row['opt3']; ?></td>
+                                    <td><?PHP echo $row['opt4']; ?></td>
+                                    <td><?PHP echo $row['answer']; ?></td>
+                                    <td><?PHP echo $row['course']; ?></td>
 
                                     <td>
                                         <form method="POST" action="../../controller/supprimerarticle.php">
                                             <input type="submit" name="supprimer" value="supprimer" class="btn btn-danger">
-                                            <input type="hidden" value=<?PHP echo $row['idNewsArticle']; ?> name="idNewsArticle">
+                                            <input type="hidden" value=<?PHP echo $row['id']; ?> name="id">
                                         </form>
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary" href="modifierarticles.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Modifier </a>
+                                        <a class="btn btn-primary" href="modifierquiz.php?id=<?PHP echo $row['id']; ?>">Modifier </a>
                                     </td>
                                 </tr>
                                <?php $nbre++; ?>
@@ -602,13 +593,13 @@ foreach ($listearticle as $row) {
             </div>
                       
                         </table>
-                        <?php  $auteurC = new articleC();
-                         $nombre = $auteurC->affichernbreauteur();
+                        <?php  $auteurC = new quizC();
+                         $nombre = $auteurC->affichernbrprt();
                             ?>
                             <?php
                             foreach ($nombre as $row) {
                             ?>
-                                                                <td><?PHP echo "NOMBRES DES AUTEURS: " . $row['nbr'] ; ?></td> <?php } ?>
+                                                                <td><?PHP echo "NOMBRES DES PARTICIPANTS: " . $row['nbra'] ; ?></td> <?php } ?>
 
                     </div>
 
