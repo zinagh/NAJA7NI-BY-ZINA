@@ -79,7 +79,7 @@
                                     <td><?PHP echo $row['id']; ?></td>
                                     <td><?PHP echo $row['mail']; ?></td>
                                     <td><?PHP echo $row['date']; ?></td>
-                                    <td><?PHP echo $row['score']; ?></td>    
+                                    <td><?PHP echo $row['score']; echo "%";?></td>    
                                 </tr>
                             <?PHP
                             }

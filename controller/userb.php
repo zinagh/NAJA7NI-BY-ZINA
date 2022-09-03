@@ -27,7 +27,7 @@ class userb{
     public function adduser($user)
     {
     $sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, datenaissance, sexe, numtel, adresse)
-    VALUES (:nom, :prenom, :email, :hashed_password, :datenaissance, :sexe , :numtel, :adresse)";
+    VALUES (:nom, :prenom, :email, :mdp, :datenaissance, :sexe , :numtel, :adresse)";
     $db = config::getConnexion();
      try {
          $query = $db->prepare($sql);
@@ -41,7 +41,6 @@ class userb{
             'sexe' => $user->getSexe(),
             'numtel' => $user->getNumtel(),
             'adresse' => $user->getAdresse(),
-            'admin'=> $user->getAdmin(),
          ]);
      } catch (Exception $e) {
          echo 'Erreur: ' . $e->getMessage();

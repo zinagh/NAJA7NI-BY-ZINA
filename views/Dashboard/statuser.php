@@ -65,34 +65,31 @@ if (!isset($_POST['add2'])) {
                 </div>
                 <div class="header__navbar">
                     <ul class="list-unstyled">
-                        <li class="has-sub">
+                    <li class="has-sub">
                             <a href="index.php">
                                 <i class="fas fa-home"></i>Acceuil
                                 <span class="bot-line"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="gestionannonces.php">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="bot-line"></span>Gestion des annonces</a>
-                        </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
-                        <li class="has-sub">
+                            <li>
+                                <a href="gestionannonces.php">
+                                    <i class="fas fa-tag"></i>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
+                            </li> 
+                          
+                            <li class="has-sub">
                             <a href="gestionactualites.php">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="bot-line"></span>Gestion des actualités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="gestioncomptes.php">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Gestion des comptes</a>
-
-                        </li>
+                                    <i class="fas fa-list-alt"></i>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
+                            
+                            </li>
+                        
+                            <li class="has-sub">
+                                <a href="gestioncomptes.php">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>Gestion des comptes</a>
+                            
+                            </li>
                     </ul>
                 </div>
                 <div class="header__tool">
@@ -509,8 +506,8 @@ if (!isset($_POST['add2'])) {
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">NOMBRES ARTICLES</th>
-                                    <th scope="col">NOMBRES AUTEURS</th>
+                                    <th scope="col">NOMBRES COURS</th>
+                                    <th scope="col">NOMBRES DES PROFS</th>
                                     
                                   
                                 </tr>
@@ -556,7 +553,7 @@ foreach ($art as $row) {
                         <?PHP
                         $articleC = new articleC();
                       
-                            $listearticle = $articleC->affichernbrefb();
+                            $listearticle = $articleC->affichernbrejv();
                         
 
                         ?>
@@ -588,11 +585,11 @@ foreach ($art as $row) {
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">POST FOOTBALL</th>
-                                    <th scope="col">POST HANDBALL</th>
-                                    <th scope="col">POST TENNIS</th>
-                                    <th scope="col">POST ATHLETISME</th>
-                                    <th scope="col">POST CYCLISME</th>
+                                    <th scope="col">COURS JAVA</th>
+                                    <th scope="col">COURS PYTHEN</th>
+                                    <th scope="col">COURS PHP</th>
+                                    <th scope="col">COURS JS</th>
+                                    <th scope="col">COURS HTML</th>
                                   
                                 </tr>
                             </thead>
@@ -607,7 +604,7 @@ foreach ($listearticle as $row) {
                                 <td><?PHP echo $row['nbrfb'] ; ?></td> 
 
                                 <?php  $auteurC = new articleC();
-                         $nombre = $auteurC->affichernbrehb();
+                         $nombre = $auteurC->affichernbrepy();
                             ?>
                             <?php
                             foreach ($nombre as $row) {
@@ -615,19 +612,19 @@ foreach ($listearticle as $row) {
                                                                 <td><?PHP echo $row['nbrhb'] ; ?></td> <?php } ?>
 
                                                                 <?php  $tennisC = new articleC();
-                         $nombretn = $tennisC->affichernbretennis();
+                         $nombretn = $tennisC->affichernbreath();
                             ?>
                             <?php
                             foreach ($nombretn as $row) {
                             ?>
-                                                                <td><?PHP echo $row['nbrtn'] ; ?></td> <?php } ?>
+                                                                <td><?PHP echo $row['nbrath'] ; ?></td> <?php } ?>
                                                                 <?php  $athletismeC = new articleC();
-                         $nombreath = $athletismeC->affichernbreath();
+                         $nombreath = $athletismeC->affichernbrejs();
                             ?>
                             <?php
                             foreach ($nombreath as $row) {
                             ?>
-                                                                <td><?PHP echo $row['nbrath'] ; ?></td> <?php } ?>
+                                                                <td><?PHP echo $row['nbrjs'] ; ?></td> <?php } ?>
                             
                             <?php  $cyclismeC = new articleC();
                          $nombrecyc = $cyclismeC->affichernbrecyc();
@@ -680,7 +677,7 @@ foreach ($listearticle as $row) {
                             <thead>
                                 <tr>
                     <p class="lead text-center">
-                        ARTICLES PLUS VUES
+                        COURS PLUS VUES
                     </p>
                                 </tr>
                             </thead>

@@ -39,7 +39,7 @@ else
         $nom=mysqli_query($conn,$sql);
         $_SESSION["email"] = $email;
         mysqli_query($conn,"update utilisateurs set loggedin=1 where email='$email';");
-        header("Location: ../views/front/Annonce.php");
+        header("Location: ../views/front/index.php");
         
     }
     }
