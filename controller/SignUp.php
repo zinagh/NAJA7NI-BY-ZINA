@@ -13,10 +13,10 @@
     $numtel = $_POST['numtel'];
     $adresse = $_POST['adresse'];
     
-    $hashed_password=password_hash($mdp,PASSWORD_DEFAULT);
+    //$hashed_password=password_hash($mdp,PASSWORD_DEFAULT);
 
-    $userb=new userb;
-    $user=new user($nom,$prenom,$email,$hashed_password,$datenaissance,$sexe,$numtel,$adresse,'0');
+    $userb=new userb();
+    $user=new user($nom,$prenom,$email,$mdp,$datenaissance,$sexe,$numtel,$adresse);
     $userb->adduser($user);
     $_SESSION["email"] = $email;
-    header("Location: ../views/front/annonce.php?signup=success");
+    header("Location: ../views/front/index.php?signup=success");

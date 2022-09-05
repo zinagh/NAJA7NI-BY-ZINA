@@ -1,39 +1,39 @@
 <?php
-include "../../controller/ArticleC.php";
-include_once "../../model/Articles.php";
+include_once 'C://wamp64/www/naja7ni/controller/QuizC.php';
+include_once 'C://wamp64/www/naja7ni/model/Quiz.php';
+include 'DBconnection.php';
 
-
-$articleC = new articleC();
+$articleC = new quizC();
 $error = "";
 if (
-    isset($_POST["titre"]) &&
-    isset($_POST["texte"]) &&
-    isset($_POST["auteur"]) &&
-    isset($_POST["urlImage"]) &&
-    isset($_POST["notifCreateur"]) &&
-  //  isset($_POST["Datearticle"]) &&
-    isset($_POST["postCategory"])
+    isset($_POST["question"]) && 
+    isset($_POST["opt1"]) &&
+    isset($_POST["opt2"]) && 
+    isset($_POST["opt3"]) && 
+    isset($_POST["opt4"]) &&
+    isset($_POST["answer"])&&
+    isset($_POST["course"])
 ) {
     if (
-        !empty($_POST["titre"]) &&
-        !empty($_POST["texte"]) &&
-        !empty($_POST["auteur"]) &&
-        !empty($_POST["urlImage"]) &&
-        isset($_POST["notifCreateur"]) &&
-      //  isset($_POST["Datearticle"]) &&
-        isset($_POST["postCategory"])
+        !empty($_POST["question"]) && 
+        !empty($_POST["opt1"]) &&
+        !empty($_POST["opt2"]) && 
+        !empty($_POST["opt3"]) && 
+        !empty($_POST["opt4"]) &&
+        !empty($_POST["answer"])&&
+        !empty($_POST["course"])
     ) {
-        $article = new article(
-            $_POST['titre'],
-            $_POST['texte'],
-            $_POST['auteur'],
-            $_POST['urlImage'],
-            $_POST['notifCreateur'],
-          //  $_POST['Datearticle'],
-            $_POST['postCategory']
+        $art = new quiz(
+            $_POST["question"],
+            $_POST["opt1"],
+            $_POST["opt2"],
+            $_POST["opt3"],
+            $_POST["opt4"],
+            $_POST["answer"],
+            $_POST["course"]
         );
-        $articleC->modifierarticles($article, $_GET['idNewsArticle']);
-        header('Location:../Dashboard/gestionactualites.php');
+        $articleC->modifierquiz($art, $_GET['id']);
+        header('Location:../Dashboard/gestionannonces.php');
     } else
         echo "Missing information";
 }
@@ -95,36 +95,33 @@ if (
                     </a>
                 </div>
                 <div class="header__navbar">
-                    <ul class="list-unstyled">
+                <ul class="list-unstyled">
                         <li class="has-sub">
                             <a href="index.php">
                                 <i class="fas fa-home"></i>Acceuil
                                 <span class="bot-line"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="gestionannonces.php">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="bot-line"></span>Gestion des annonces</a>
-                        </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
-                        <li class="has-sub">
+                            <li>
+                                <a href="gestionannonces.php">
+                                    <i class="fas fa-tag"></i>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
+                            </li> 
+                          
+                            <li class="has-sub">
                             <a href="gestionactualites.php">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="bot-line"></span>Gestion des actualités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="gestioncomptes.php">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Gestion des comptes</a>
-
-                        </li>
-                    </ul>
+                                    <i class="fas fa-list-alt"></i>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
+                            
+                            </li>
+                        
+                            <li class="has-sub">
+                                <a href="gestioncomptes.php">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>Gestion des comptes</a>
+                            
+                            </li>
+                        </ul>
                 </div>
                 <div class="header__tool">
                     <div class="header-button-item has-noti js-item-menu">
@@ -509,97 +506,71 @@ if (
                 </div>
 
                 <?php
-                if (isset($_GET['idNewsArticle'])) {
-                    $article = $articleC->recupererarticle($_GET['idNewsArticle']);
+                                //    $art = new quizC();
+
+                if (isset($_GET['id'])) {
+                    $art =$articleC->recupererquiz($_GET['id']);
                 ?>
-
-
                     <div class="container-fluid">
                         <div>
                             <form method="POST" action="">
                                 <div class="form-group">
                                     <br><br><br>
-                                    <label for="idNewsArticle">idArticle</label>
-                                    <input type="text" class="form-control1" name="idNewsArticle" id="idNewsArticle" value="<?php echo $article['idNewsArticle']; ?>" disabled>
+                                    <label for="id">id</label>
+               <input type="text" class="form-control1" name="id" id="id" value="<?php echo $art['id']; ?>" disabled>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="titre">Titre</label>
-                                    <input type="text" class="form-control" name="titre" id="titre" value="<?php echo $article['titre']; ?> ">
-                                </div>
-                                <div class="form-group">
-                                    <label for="texte">Texte</label>
-                                    <textarea class="form-control" name="texte" rows="10"> <?php echo $article['texte']; ?>  </textarea>
-                                </div>
+                                <label for="question">Question</label>
+        <input type="text" class="form-control" id="question" name="question" value="<?php echo $art['question']; ?>">
+    </div>
+    <div class="form-group">
+        <label for="opt1">Opt1</label>
+        <input type="text" class="form-control" id="opt1" name="opt1" value="<?php echo $art['opt1']; ?>">
+    </div>
+    <div class="form-group">
+        <label for="opt2">Opt2</label>
+        <input type="text" class="form-control" id="opt2" name="opt2" value="<?php echo $art['opt2']; ?>">
+    </div>
+    <div class="form-group">
+        <label for="opt3">Opt3</label>
+        <input type="text" class="form-control" id="opt3" name="opt3" value="<?php echo $art['opt3']; ?>">
+    </div>
+    <div class="form-group">
+        <label for="opt4">Opt4</label>
+        <input type="text" class="form-control" id="opt4" name="opt4" value="<?php echo $art['opt4']; ?>">
+    </div>
+    <div class="form-group">
+        <label for="answer">Answer</label>
+        <input type="text" class="form-control" name="answer" value="<?php echo $art['answer']; ?>">
+    </div>
+    <div class="form-group">
+              <label for="course">Course</label>
+              <select class="form-control1" id="course" name="course" value="<?php echo $art['course']; ?>" >
+                <option selected="selected">Choose One...</option>
+                <option>POO</option>
+                <option>PHP</option>
+                <option>JAVA</option>
+                <option>JAVASCRIPT</option>
+                <option>HTML</option>
+                <option>PYTHON</option>
 
-                                <div class="form-group">
-                                    <label for="auteur">Auteur</label>
-                                    <input type="text" class="form-control" name="auteur" value="<?php echo $article['auteur']; ?> ">
-                                </div>
-                                <div class="form-group">
-                                    <label for="urlImage">Ajouter Image</label>
-                                    <input type="file" class="form-control-file" name="urlImage" value="<?php echo $article['urlImage']; ?> ">
-                                </div>
-
-                          <!--      <div class="form-group">
-                                    <label for="Datearticle">Datearticle</label>
-                                    <input name="Datearticle" type="date" value="<?php echo $article['Datearticle'];
-                                                                                ?>">
-                                </div>-->
-
-                                <div class="form-group">
-                                    <label for="notifCreateur">Notifications </label>
-                                    <select class="form-control1" name="notifCreateur">
-                                        <option value="1" value="<?php echo $article['notifCreateur']; ?> ">Oui</option>
-                                        <option value="0" value="<?php echo $article['notifCreateur']; ?> ">Non</option>
-                                    </select>
-                                </div>
-                              <div class="form-group">
-
-                                <label for="postCategory">Categories</label>
-              <select type="text" class="form-control1" name="postCategory" value="<?php echo $article['postCategory']; ?> " >
-              <option selected="selected"><?php echo $article['postCategory']; ?> </option>
-              <option>FootBall</option>
-                <option>Tennis</option>
-                <option>Athlétisme</option>
-                <option>HandBall</option>
-                <option>Cyclisme</option>
               </select>
-                </div>
-
-                <div class="form-group">
-                                    <label for="idNewsArticle">VUES</label>
-                                    <input type="text" class="form-control1" name="idNewsArticle" id="idNewsArticle" value="<?php echo $article['vues']; ?>" disabled>
-                                </div>
-                                <button type="submit" value="Envoyer" class="btn btn-prim">Modifier</button>
-                                <button type="reset" value="Annuler" class="btn btn-pr">Annuler</button>
+    </div>
+                                <button type="submit" value="Envoyer" class="btn btn-prim" name="signup_submit">Modifier</button>
+                                <button type="reset" value="Annuler" class="btn btn-pr" name="signup_submit">Annuler</button>
 
                                 <br><br><br>
 
                             </form>
                         </div>
-                        <script>
-                            CKEDITOR.replace('texte');
-                        </script>
-
-
-
-
-
                     </div>
                     <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
-
     <!-- Scroll to Top Button-->
     <button id="btnscrolltotop">
         <i class="material-icons">arrow_circle_up</i>

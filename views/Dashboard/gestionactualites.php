@@ -114,7 +114,7 @@ $error = "";
                             </a>
                         </li>
                             <li>
-                                <a href="gestionbillets.php">
+                                <a href="gestionannonces.php">
                                     <i class="fas fa-tag"></i>
                                     <span class="bot-line"></span>Gestion des Quiz</a>
                             </li> 

@@ -7,7 +7,7 @@ include '../../controller/PHPfunctions.php';include "C://wamp64/www/naja7ni/cont
 session_start();
 
 $choix='Par défaut';
-$noresultmsg='Désolé, il n’y a aucun produit actuellement.';
+$noresultmsg='Désolé, il n’y a aucun question actuellement.';
 
 $compte="Compte";
 if (isset($_SESSION["email"]))
@@ -144,11 +144,12 @@ $choix='Par défaut';}
                         <?php if($compte=="Profil"){ 
                 echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
                 }?>
-                
+                         <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterquiz.php'>Ajouter Quiz</a></li>";
+                }?>
                         <li><a href="cours.php">Cours</a></li>
               
                         <li><a href="account.php"><?php echo $compte ?></a></li>
-            </ul>
             </ul>
         </nav>
     
@@ -163,27 +164,27 @@ $choix='Par défaut';}
         <h2 class="title">Catégories des Cours</h2>
         <div class="row">
             <?php $s=$npage+1;?>
-            <?php echo "<a href='Annonce.php?vldjv=1&?cati=java#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldjv=1&?cati=java#c1' class='col-categories'>";?>
             <img src="assets/img/java1.jpg" alt="JAVA">
                 <h2>JAVA</h2>
             </a>
-            <?php echo "<a href='Annonce.php?vldphp=1&?cati=php#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldphp=1&?cati=php#c1' class='col-categories'>";?>
             <img src="assets/img/php.jpg" alt="PHP">
                 <h2>PHP</h2>
             </a>
-            <?php echo "<a href='Annonce.php?vldhml=1&?cati=html#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldhml=1&?cati=html#c1' class='col-categories'>";?>
             <img src="assets/img/html.jpg" alt="HTML">
                 <h2>HTML</h2>
             </a>
-            <?php echo "<a href='Annonce.php?vldjs=1&?cati=js#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldjs=1&?cati=js#c1' class='col-categories'>";?>
             <img src="assets/img/js.jpg" alt="JS">
                 <h2>JS</h2>
             </a>
-            <?php echo "<a href='Annonce.php?vldphn=1&?cati=python#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldphn=1&?cati=python#c1' class='col-categories'>";?>
             <img src="assets/img/python.jpg" alt="PYTHON">
                 <h2>PYTHON</h2>
             </a>
-            <?php echo "<a href='Annonce.php?vldp=1&?cati=poo#c1' class='col-categories'>";?>
+            <?php echo "<a href='quiz.php?vldp=1&?cati=poo#c1' class='col-categories'>";?>
             <img src="assets/img/poo.jpg" style="width: 100%;" alt="POO">
                 <h2>POO</h2>
             </a>
@@ -194,10 +195,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=php&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=php&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -205,10 +206,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=java&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=java&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -216,10 +217,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=html&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=html&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -227,10 +228,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=js&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=js&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -238,10 +239,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=python&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=python&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -249,10 +250,10 @@ $choix='Par défaut';}
       
       <center>	<div class="container">
                   <h2>Votre Email Pour Passer L'examen :</h2>
-                  <form method="POST" action="Annonce.php?categorie=poo&?npage=<?php $s ?>#c1">
+                  <form method="POST" action="quiz.php?categorie=poo&?npage=<?php $s ?>#c1">
                   <input type="mail" name="mail" required="" id="m" >
                    
-                  <input type="submit" name="submit" value="cceder vers l'exmen"  >
+                  <input type="submit" name="submit" value="Acceder vers l'examen"  >
   <?php $vld=0;?>
               </div>	</center>
            <?php }?>
@@ -272,62 +273,9 @@ $choix='Par défaut';}
 -->
 <tbody>
         <?php
-        if($NbAnnonces==0 && $categorie){
-            echo "</br></br></br></br></br>";
-            echo "<h1 style='text-align:center;'> $noresultmsg </h1>";
-            echo "</br></br></br>";
-            
-        }else{
-        echo"<div class='row'>";
-        $n=0;
-        $i=0;
-        while($rows=mysqli_fetch_assoc($result))
-        {
-            if(($rows['course']==$categorie)){
-                if($n>=($npage*12))
-                {   
-                    $i++;
-                    $id=$rows['id'];
-                    ?>
-                     
-                    <?php
-                }
-            }
-            $n++;
-            if($i==12)
-            break;
-        }
-        }
+    
         echo"</div>";    
-           echo" <div class='page-btn'>";
-        if($npage!=0){
-            $s=$npage-1;
-            echo"<a href='Annonce.php?categorie=$categorie&npage=$s#c1'><span>&#8592;</span></a>"; 
-        }
-        $nbpages=intdiv($NbAnnonces, 12);
-        $mod=$NbAnnonces%12;
-        if($mod>0){
-            $nbpages+=1;
-            }
-
-        for($i=0;$i<$nbpages;$i++){
-            $s=$i+1;
-            if($npage==$i){
-                if($nbpages>1)
-                echo"<a class='active' href='Annonce.php?categorie=$categorie&npage=$i#c1'><span>$s</span></a>";
-            }else{
-                echo"<a href='Annonce.php?categorie=$categorie&npage=$i#c1'><span>$s</span></a>";
-            }   
-        }
-        if($npage!=($nbpages-1)){
-
-            if($NbAnnonces>12){
-                $s=$npage+1;
-                echo"<a href='Annonce.php?categorie=$categorie&npage=$s#c1'><span>&#8594;</span></a>"; 
-            }      
-        }
-            ?>
-        </div>
+         ?>
     </div>
     <?php 
 $_SESSION['course']=$categorie;
@@ -393,23 +341,34 @@ $quest_data=($ques->show_questions($categorie));
    <div id="c1" class="small-container">
 
 <div class="container position-relative" style="text-align: center; margin-top: -380px;">
+<?php if ($categorie && $NbAnnonces!=0 ){?>
 
 <form action="result_show.php" method="POST" id="myform" style="margin-top: -400px;">
-
+<?php }?>
     <center>
 <div class="row col-sm-7 ">
-<?php if ($categorie){?>
+<?php if ($categorie ){?>
   <script type="text/javascript">
-      var timeleft=<?php echo $NbAnnonces?>*1;                                   //important--> the scope of javascript variable is global but not in php(we have to use global keyword)
+      var timeleft=<?php echo $NbAnnonces?>*60;                                   //important--> the scope of javascript variable is global but not in php(we have to use global keyword)
   </script>
 	<div  style="font-size: 15px" id="timeout">time out</div>
 
     <?php }?>
-<?php 
-
-	$i=1;                     //to  display question number
+<?php     
+    if($NbAnnonces==0 && $categorie){
+        echo "</br></br></br></br></br>";
+        echo "<h1 style='text-align:center;'> $noresultmsg </h1>";
+        echo "</br></br></br>";
+        
+    }else{
+        
+		 $n=0;
+         $i=0;        
+     //to  display question number
 	foreach ($quest_data as  $quest) {
-		
+         //   $id=$rows['id'];
+     //   $i=0;
+     $i++;
  ?>
  <table class="table table-hover table-bordered table-active">
   <thead class="thead-dark">
@@ -444,12 +403,15 @@ $quest_data=($ques->show_questions($categorie));
   </tbody>
 </table>
 	<?php 
-	$i++;        // increment question number by 1
-	} 			//loop ends
-	?>
+//	
+ //   $n++;
+      // increment question number by 1
+    }} 		//loop ends
+  ?>
+    
 
 </div><center>
-<?php if ($categorie){?>
+<?php if ($categorie && $NbAnnonces!=0 ){?>
 <input type="submit" class="btn btn-success" action="result_show.php">
 <?php }?>
 </form>
@@ -471,7 +433,7 @@ $quest_data=($ques->show_questions($categorie));
                 </div>
                 <div class="footer-col-2">
                     <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                    <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                    <p>Donnez Un Nouveau Style à Vos Etudes !</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Liens</h3>
@@ -503,7 +465,7 @@ $quest_data=($ques->show_questions($categorie));
             function handleSelect(elm) 
             {
             var categorie = "<?php echo $categorie; ?>";
-            window.location = "Annonce.php?&categorie="+categorie+"&npage=0#c1"; 
+            window.location = "quiz.php?&categorie="+categorie+"&npage=0#c1"; 
             //window.location = "AjouterAnnonce.html?tri=1"; 
             //window.location = elm.value+".php"; 
             } 

@@ -65,36 +65,33 @@ if (!isset($_POST['add2'])) {
                     </a>
                 </div>
                 <div class="header__navbar">
-                    <ul class="list-unstyled">
+                <ul class="list-unstyled">
                         <li class="has-sub">
                             <a href="index.php">
                                 <i class="fas fa-home"></i>Acceuil
                                 <span class="bot-line"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="gestionannonces.php">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="bot-line"></span>Gestion des annonces</a>
-                        </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
-                        <li class="has-sub">
+                            <li>
+                                <a href="gestionannonces.php">
+                                    <i class="fas fa-tag"></i>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
+                            </li> 
+                          
+                            <li class="has-sub">
                             <a href="gestionactualites.php">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="bot-line"></span>Gestion des actualités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="gestioncomptes.php">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Gestion des comptes</a>
-
-                        </li>
-                    </ul>
+                                    <i class="fas fa-list-alt"></i>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
+                            
+                            </li>
+                        
+                            <li class="has-sub">
+                                <a href="gestioncomptes.php">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>Gestion des comptes</a>
+                            
+                            </li>
+                        </ul>
                 </div>
                 <div class="header__tool">
                     <div class="header-button-item has-noti js-item-menu">
@@ -571,7 +568,7 @@ foreach ($listearticle as $row) {
                                     <td><?PHP echo $row['course']; ?></td>
 
                                     <td>
-                                        <form method="POST" action="../../controller/supprimerarticle.php">
+                                        <form method="POST" action="../../controller/supprimerquiz.php">
                                             <input type="submit" name="supprimer" value="supprimer" class="btn btn-danger">
                                             <input type="hidden" value=<?PHP echo $row['id']; ?> name="id">
                                         </form>
@@ -588,7 +585,7 @@ foreach ($listearticle as $row) {
                             <div class="barre">
                     <ul>
    <h1>     <?php
-                        echo "NOMBRES DES ARTICLES: " . $nbre . "<br />\n";?></h1>
+                        echo "NOMBRES DES QUESTIONS: " . $nbre . "<br />\n";?></h1>
                     </ul>
             </div>
                       
@@ -607,17 +604,17 @@ foreach ($listearticle as $row) {
     <ul class="pagination">
     <li>
         <?php if ($Previous > 0) :?>
-      <a href="afficherarticle.php?page=<?= $Previous; ?>" classe="prev" aria-label="Previous">
+      <a href="affichequiz.php?page=<?= $Previous; ?>" classe="prev" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
       <?php endif;?>
     </li>
     <?php for($i = 1; $i<= $pages; $i++) : ?>
-        <li classe="pageNumber"><a href="afficherarticle.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+        <li classe="pageNumber"><a href="affichequiz.php?page=<?= $i; ?>"><?= $i; ?></a></li>
     <?php endfor; ?>
     <li>
     <?php if ($Next <= $pages) :?>
-      <a href="afficherarticle.php?page=<?= $Next; ?>" classe="next" aria-label="Next">
+      <a href="affichequiz.php?page=<?= $Next; ?>" classe="next" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
       <?php endif;?>

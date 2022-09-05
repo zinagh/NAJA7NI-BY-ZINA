@@ -33,7 +33,7 @@ if (isset($_GET["msg"]))
        isset($_POST["opt2"]) && 
        isset($_POST["opt3"]) && 
        isset($_POST["opt4"]) &&
-       isset($_POST["answer"])&&
+      // isset($_POST["answer"])&&
        isset($_POST["course"])
    ) {
        if (
@@ -42,7 +42,7 @@ if (isset($_GET["msg"]))
            !empty($_POST["opt2"]) && 
            !empty($_POST["opt3"]) && 
            !empty($_POST["opt4"]) &&
-           !empty($_POST["answer"])&&
+         //  !empty($_POST["answer"])&&
            !empty($_POST["course"])
        ) {
            $art = new quiz(
@@ -75,7 +75,7 @@ if (isset($_GET["msg"]))
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Ajouter annonce</title>
+    <title>Ajouter questions</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="assets/img/logo.ico">
@@ -180,7 +180,7 @@ if (isset($_GET["msg"]))
     </div>
     <div class="form-group">
         <label for="answer">Answer</label>
-        <input type="text" class="form-control" id="answer" name="answer">
+        <input type="text" class="form-control" name="answer">
     </div>
     <div class="form-group">
               <label for="course">Course</label>
@@ -221,7 +221,7 @@ if (isset($_GET["msg"]))
                     </div>
                     <div class="footer-col-2">
                         <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                        <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                        <p>Donnez Un Nouveau Style à Vos Etudes !</p>
                     </div>
                     <div class="footer-col-3">
                         <h3>Liens</h3>

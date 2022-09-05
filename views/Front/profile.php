@@ -4,8 +4,6 @@ session_start();
 $sql='select * from utilisateurs where email="'.$_SESSION["email"].'";';
 $result=mysqli_query($conn,$sql);
 $row=mysqli_fetch_assoc($result);
-$sql='select * from vente where email="'.$_SESSION["email"].'" order by idvente desc;';
-$resultat=mysqli_query($conn,$sql);
 $error="";
 $success="";
 if (isset($_GET['msgerror']) ){
@@ -14,6 +12,11 @@ $error=$_GET['msgerror'];
 if (isset($_GET['msgsuccess']) ){
     $success=$_GET['msgsuccess'];
     }
+    $compte="Compte";
+if (isset($_SESSION["email"]))
+{
+    $compte="Profil";
+}
 
 ?>
 
@@ -40,18 +43,21 @@ if (isset($_GET['msgsuccess']) ){
                   <a href="index.php"> <img src="assets/img/logo.png"> </a>
               </div>
           
-          <nav>
-              <ul id="MenuItems">
-                  <li><a href="index.php">Acceuil</a></li>
-                  <li><a href="annonce.php">Produits</a></li>
-                  <li><a href='htmlAjouterAnnonce.php'>Vendre un produit</a></li>
-                  <li><a href="billets.php">Billets</a></li>
-                  <li><a href="actualites.php">Cours</Col></a></li>
-                  <li><a href="Publicite.php">Publicite</a></li>
-                  <li><a href="account.php">Profil</a></li>
-              </ul>
-          </nav>
-          <a href="panier.php"><img src="assets/img/cart.png" class="cart" alt=""></a>
+              <nav>
+            <ul id="MenuItems">
+            <li><a href="index.php">Acceuil</a></li>
+                        <li><a href="quiz.php">Quiz</a></li>
+                        <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
+                }?>
+                         <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterquiz.php'>Ajouter Quiz</a></li>";
+                }?>
+                        <li><a href="cours.php">Cours</a></li>
+              
+                        <li><a href="account.php"><?php echo $compte ?></a></li>
+            </ul>
+        </nav>
           <img src="assets/img/menu.png" class="menu-icon" onclick="togglemenu()">
         </div>
       
@@ -98,37 +104,7 @@ if (isset($_GET['msgsuccess']) ){
         
         </div>
 
-        <div class="historique tabShow">
-            <h1>Historique</h1>
-            <table class="historiqueachat">
-            <tr> 
-            <th> ID </th>
-            <th> Titre </th>
-            <th>Prix</th>
-            <th>Date d'achat</th>
-            </tr>
-            <?php 
-                            while($rows=mysqli_fetch_assoc($resultat))
-                            {
-                                ?>
-
-                            <tr class="tr-shadow">
-
-                                <td><?php echo $rows['idvente']; ?></td>
-                                <td><?php echo $rows['titre']; ?></td>
-                                <td><?php echo $rows['prix']; ?></td>
-                                <td><?php echo $rows['datevente']; ?></td>
-
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                                
-           
-            
-            </table>
-        
-        </div>
+       
         </div>
 
 </div>
@@ -170,7 +146,7 @@ $(".tab").click(function() {
                 </div>
                 <div class="footer-col-2">
                     <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                    <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                    <p>Donnez Un Nouveau Style à Vos Etudes !</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Liens</h3>

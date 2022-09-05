@@ -14,7 +14,7 @@ $error = "";
         isset($_POST["opt2"]) && 
         isset($_POST["opt3"]) && 
         isset($_POST["opt4"]) &&
-        isset($_POST["answer"])&&
+     //   isset($_POST["answer"])&&
         isset($_POST["course"])
     ) {
         if (
@@ -23,7 +23,7 @@ $error = "";
             !empty($_POST["opt2"]) && 
             !empty($_POST["opt3"]) && 
             !empty($_POST["opt4"]) &&
-            !empty($_POST["answer"])&&
+       //     !empty($_POST["answer"])&&
             !empty($_POST["course"])
         ) {
             $art = new quiz(
@@ -98,32 +98,33 @@ $error = "";
                     </a>
                 </div>
                 <div class="header__navbar">
-                    <ul class="list-unstyled">
+                <ul class="list-unstyled">
                         <li class="has-sub">
                             <a href="index.php">
                                 <i class="fas fa-home"></i>Acceuil
                                 <span class="bot-line"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="gestionannonces.php">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="bot-line"></span>Gestion des annonces</a>
-                        </li>
-                  
-                        <li class="has-sub">
+                            <li>
+                                <a href="gestionannonces.php">
+                                    <i class="fas fa-tag"></i>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
+                            </li> 
+                          
+                            <li class="has-sub">
                             <a href="gestionactualites.php">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="bot-line"></span>Gestion des actualités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="gestioncomptes.php">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Gestion des comptes</a>
-
-                        </li>
-                    </ul>
+                                    <i class="fas fa-list-alt"></i>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
+                            
+                            </li>
+                        
+                            <li class="has-sub">
+                                <a href="gestioncomptes.php">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>Gestion des comptes</a>
+                            
+                            </li>
+                        </ul>
                 </div>
                 <div class="header__tool">
                     <div class="header-button-item has-noti js-item-menu">

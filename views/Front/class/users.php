@@ -8,7 +8,7 @@ class users
 	public $host="localhost";
 	public $username="root";
 	public $pass="";
-	public $db_name="uniquedeveloper";
+	public $db_name="naja7ni";
 	public $conn;
 	public $data;
 	public $cat_data;

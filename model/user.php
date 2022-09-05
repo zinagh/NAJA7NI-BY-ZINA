@@ -5,17 +5,14 @@ class user{
     private $prenom;
     private $email;
     private $mdp;
-    private $solde;
     private $datenaissance;
     private $sexe;
     private $numtel;
-    private $adresse;
-    private $loggedin;
-    private $loggedindashboard;
+    private $adresse;   
     private $ban;
     private $admin;
-
-
+    private $loggedin;
+    private $loggedindashboard;
 
 public function getNom()
     {
@@ -82,8 +79,49 @@ public function getNom()
     {
         return $this->titre;
     }
+    
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    }
+    public function setEmail($email)
+    {
+         $this->email =$email;
+    }
+    public function setMdp($mdp)
+    {
+         $this->mdp=$mdp;
+    }
+    public function setDatenaissance($datenaissance)
+    {
+         $this->datenaissance=$datenaissance;
+    }
+    public function setSexe($sexe)
+    {
+         $this->sexe=$sexe;
+    }
 
-    public function __construct($nom, $prenom, $email, $mdp, $datenaissance, $sexe, $numtel, $adresse, $admin)
+    public function setNumtel($numtel)
+    {
+         $this->numtel=$numtel;
+    }
+    public function setAdresse($adresse)
+    {
+         $this->adresse=$adresse;
+    }
+    public function setBan($ban)
+    {
+         $this->ban=$ban;
+    }
+    public function setAdmin($admin)
+    {
+         $this->admin=$admin;
+    }
+    public function __construct($nom, $prenom, $email, $mdp, $datenaissance, $sexe, $numtel, $adresse)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
@@ -93,7 +131,6 @@ public function getNom()
         $this->sexe = $sexe;
         $this->numtel = $numtel;
         $this->adresse = $adresse;
-        $this->admin= $admin;
 
     }
 

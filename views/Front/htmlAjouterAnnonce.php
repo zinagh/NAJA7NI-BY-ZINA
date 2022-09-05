@@ -3,12 +3,15 @@ include_once 'C://wamp64/www/naja7ni/controller/ArticleC.php';
 include_once 'C://wamp64/www/naja7ni/model/Articles.php';
 include 'DBconnection.php';
 session_start();
-if ($_SESSION["email"]=="")
+$compte="Compte";
+if (isset($_SESSION["email"]))
 {
-    header("Location: account.php");
-    exit();
+    $compte="Profil";
 }
-
+$sql='select * from utilisateurs where email="'.$_SESSION["email"].'";';
+$result=mysqli_query($conn,$sql);
+$row=mysqli_fetch_assoc($result);
+$compte=$row['nom'].' '.$row['prenom'];
 $error="";
 if (isset($_GET["msg"]))
     {
@@ -73,7 +76,7 @@ if (isset($_GET["msg"]))
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Ajouter annonce</title>
+    <title>Ajouter Cours</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="assets/img/logo.ico">
@@ -105,18 +108,21 @@ if (isset($_GET["msg"]))
                 <a href="index.html"> <img src="assets/img/logo.png"> </a>
             </div>
         
-        <nav>
+            <nav>
             <ul id="MenuItems">
-                <li><a href="index.php">Acceuil</a></li>
-                <li><a href="Annonce.php">Produits</a></li>
-                <li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>
-                <li><a href="billets.php">Billets</a></li>
-                <li><a href="actualites.php">Cours</a></li>
-                <li><a href="Publicite.php">Publicite</a></li>
-                <li><a href="account.php">Profil</a></li>
+            <li><a href="index.php">Acceuil</a></li>
+                        <li><a href="quiz.php">Quiz</a></li>
+                        <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
+                }?>
+                         <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterquiz.php'>Ajouter Quiz</a></li>";
+                }?>
+                        <li><a href="cours.php">Cours</a></li>
+              
+                        <li><a href="account.php"><?php echo $compte ?></a></li>
             </ul>
         </nav>
-        <a href="panier.php"><img src="assets/img/cart.png" class="cart" alt=""></a>
         <img src="assets/img/menu.png" class="menu-icon" onclick="togglemenu()">
       </div>
       </div>
@@ -163,10 +169,10 @@ if (isset($_GET["msg"]))
     </div>
     <div class="form-group">
         <label for="auteur">auteur</label>
-        <input type="text" class="form-control" id="auteur" name="auteur">
+        <input type="text" class="form-control" id="auteur" name="auteur" value="<?php echo $compte ?>" >
     </div>
     <div class="form-group">
-        <label for="urlImage">Upload Image</label>
+        <label for="urlImage">Upload Video</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="urlImage" name="urlImage">
             <label for="urlImage" class="custom-file-label">Choose File</label>
@@ -177,10 +183,6 @@ if (isset($_GET["msg"]))
         <label for="notifCreateur">notifCreateur</label>
         <input type="number" class="form-control1" id="notifCreateur" name="notifCreateur">
     </div>
-   <!-- <div class="form-group">
-        <label for="Datearticle">Datearticle</label>
-        <input type="date" class="form-control" id="Datearticle" name="Datearticle">
-    </div>-->
     <div class="form-group">
               <label for="category">Category</label>
               <select class="form-control1" id="postCategory" name="postCategory">
@@ -231,7 +233,7 @@ if (isset($_GET["msg"]))
                     </div>
                     <div class="footer-col-2">
                         <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                        <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                        <p>Donnez Un Nouveau Style à Vos Etudes !</p>
                     </div>
                     <div class="footer-col-3">
                         <h3>Liens</h3>

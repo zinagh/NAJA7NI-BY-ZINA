@@ -334,7 +334,7 @@ class quizC
         $sql = "DELETE FROM question_test WHERE id = :id";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
-        $req->bindValue(':idNewsArticle', $id);
+        $req->bindValue(':id', $id);
         try {
             $req->execute();
         } catch (Exception $e) {
@@ -358,7 +358,7 @@ class quizC
 =					WHERE id = :id'
             );
             $query->execute([
-                'question' => $quiz->getQuestion(),
+                'question' => $quiz-> getQuestion(),
                 'opt1' => $quiz->getOpt1(),
                 'opt2' => $quiz->getOpt2(),
                 'opt3' => $quiz->getOpt3(),
@@ -373,7 +373,7 @@ class quizC
         }
     }
 
-    function recupererarticle($id)
+    function recupererquiz($id)
     {
         $sql = "SELECT * from question_test where id=$id";
         $db = config::getConnexion();

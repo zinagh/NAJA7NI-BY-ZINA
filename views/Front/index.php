@@ -34,11 +34,12 @@ if (isset($_SESSION["email"]))
                         <?php if($compte=="Profil"){ 
                 echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
                 }?>
-                
+                         <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterquiz.php'>Ajouter Quiz</a></li>";
+                }?>
                         <li><a href="cours.php">Cours</a></li>
               
                         <li><a href="account.php"><?php echo $compte ?></a></li>
-            </ul>
             </ul>
         </nav>
         <img src="assets/img/menu.png" class="menu-icon" onclick="togglemenu()">
@@ -46,9 +47,9 @@ if (isset($_SESSION["email"]))
       <div class="row">
         <div class="col-2">
             <h1>Donnez Un Nouveau Style <br> à Vos Etudes!</h1>
-            <p>NAJA7NI met en rapport les vendeurs et les acheteurs en Tunisie <br>
+            <p>NAJA7NI met en rapport les developpeurs et les frameworks en Tunisie <br>
                  et offre une expérience utilisateur exceptionnelle</p>
-         <a href="annonce.php" class="btn">Explorer &#8594; </a>
+         <a href="cours.php" class="btn">Explorer &#8594; </a>
         </div>
           <div class="col-2">
              <img src="assets/img/image1.png" alt="">
@@ -72,7 +73,7 @@ if (isset($_SESSION["email"]))
                 </div>
                 <div class="footer-col-2">
                     <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                    <p>Donnez Un Nouveau Style à Votre Etudes  !</p>
+                    <p>Donnez Un Nouveau Style à Vos Etudes  !</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Liens</h3>

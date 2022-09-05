@@ -65,36 +65,33 @@ if (!isset($_POST['add2'])) {
                     </a>
                 </div>
                 <div class="header__navbar">
-                    <ul class="list-unstyled">
+                <ul class="list-unstyled">
                         <li class="has-sub">
                             <a href="index.php">
                                 <i class="fas fa-home"></i>Acceuil
                                 <span class="bot-line"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="gestionannonces.php">
-                                <i class="fas fa-bullhorn"></i>
-                                <span class="bot-line"></span>Gestion des annonces</a>
-                        </li>
-                        <li>
-                            <a href="gestionbillets.php">
-                                <i class="fas fa-tag"></i>
-                                <span class="bot-line"></span>Gestion des billets</a>
-                        </li>
-                        <li class="has-sub">
+                            <li>
+                                <a href="gestionannonces.php">
+                                    <i class="fas fa-tag"></i>
+                                    <span class="bot-line"></span>Gestion des Quiz</a>
+                            </li> 
+                          
+                            <li class="has-sub">
                             <a href="gestionactualites.php">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="bot-line"></span>Gestion des actualités</a>
-
-                        </li>
-                        <li class="has-sub">
-                            <a href="gestioncomptes.php">
-                                <i class="fas fa-user"></i>
-                                <span class="bot-line"></span>Gestion des comptes</a>
-
-                        </li>
-                    </ul>
+                                    <i class="fas fa-list-alt"></i>
+                                    <span class="bot-line"></span>Gestion des Cours</a>
+                            
+                            </li>
+                        
+                            <li class="has-sub">
+                                <a href="gestioncomptes.php">
+                                    <i class="fas fa-user"></i>
+                                    <span class="bot-line"></span>Gestion des comptes</a>
+                            
+                            </li>
+                        </ul>
                 </div>
                 <div class="header__tool">
                     <div class="header-button-item has-noti js-item-menu">
@@ -597,7 +594,7 @@ foreach ($listearticle as $row) {
                             <div class="barre">
                     <ul>
    <h1>     <?php
-                        echo "NOMBRES DES ARTICLES: " . $nbre . "<br />\n";?></h1>
+                        echo "NOMBRES DES CERSUS: " . $nbre . "<br />\n";?></h1>
                     </ul>
             </div>
                       
@@ -608,7 +605,7 @@ foreach ($listearticle as $row) {
                             <?php
                             foreach ($nombre as $row) {
                             ?>
-                                                                <td><?PHP echo "NOMBRES DES AUTEURS: " . $row['nbr'] ; ?></td> <?php } ?>
+                                                                <td><?PHP echo "NOMBRES DES PRF: " . $row['nbr'] ; ?></td> <?php } ?>
 
                     </div>
 

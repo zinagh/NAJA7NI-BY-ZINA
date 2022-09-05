@@ -62,11 +62,12 @@ if (isset($_SESSION["email"]))
                         <?php if($compte=="Profil"){ 
                 echo"<li><a href='htmlAjouterAnnonce.php'>Ajouter Cour</a></li>";
                 }?>
-                
+                         <?php if($compte=="Profil"){ 
+                echo"<li><a href='htmlAjouterquiz.php'>Ajouter Quiz</a></li>";
+                }?>
                         <li><a href="cours.php">Cours</a></li>
               
                         <li><a href="account.php"><?php echo $compte ?></a></li>
-            </ul>
             </ul>
         </nav>
              
@@ -238,7 +239,7 @@ if (isset($_SESSION["email"]))
                     </section>-->
                 </div>
                 <div id="our-picks">
-                    <h2>PHP</h2>
+                    <h2>JAVA</h2>
                     <section class="news">
                     <?php  foreach ($foot as $row) {
                         if ( $row['postCategory']=="JAVA") $path='java.jpg';
@@ -315,10 +316,17 @@ foreach ($nbr as $row) {
                            <!-- <?PHP $out = strlen($row['texte']) > 25 ? substr($row['texte'], 0, 25) . "..." : $row['texte'];  ?> -->
                            <!--  <p class="card-text "> -->
                               <!--  <?PHP echo $out  ?> -->
-                       <!--     </p> -->
-                       <!--     <div class="card-footer">
-                    <a class="btn btn-danger" name="readmore" href="blogs-details.php?idNewsArticle=<?PHP echo $row['idNewsArticle']; ?>">Read More!</a>
-                            </div>-->
+                              <br>
+                              <?php if($compte=="Profil"){                
+                             echo"    <td>
+                                        <form method='POST' action='../../controller/supprimerarticle.php' >
+                                            <input type='submit' name='supprimer' value='supprimer' class='btn btn-danger' >
+                                            <input type='hidden' value= " ; echo $row['idNewsArticle'];  echo " name='idNewsArticle'>
+                                  
+                                    
+                                        <a class='btn btn-primary' href='modifierarticles.php?idNewsArticle="; echo $row['idNewsArticle']; echo"' >Modifier </a>
+                                        </form>
+                                    </td>";   }?>
                         </div>
                     </div>
                 <?PHP }
@@ -333,7 +341,7 @@ foreach ($nbr as $row) {
     <div class="pagination">
    <!-- <li>-->
         <?php if ($Previous > 0) :?>
-      <a href="actualites.php?page=<?= $Previous; ?>" class="prev"><i class="fas fa-angle-left"></i></a>
+      <a href="cours.php?page=<?= $Previous; ?>" class="prev"><i class="fas fa-angle-left"></i></a>
         <!--<span aria-hidden="true">&laquo; Previous</span>
       </a>-->
       <?php endif;?>
@@ -341,17 +349,17 @@ foreach ($nbr as $row) {
  <?php if ($page<6) :?>
  <?php for($i = 1; $i<= $pages; $i++) : ?>
         <?php if($i==$page) :?>
-                    <!--<li>---><a href="actualites.php?page=<?= $i; ?>" class="num active"><?= $i; ?></a><!--</li>-->
+                    <!--<li>---><a href="cours.php?page=<?= $i; ?>" class="num active"><?= $i; ?></a><!--</li>-->
                     <?php else :?>
-                  <!--<li>---><a href="actualites.php?page=<?= $i; ?>" class="num "><?= $i; ?></a><!--</li>--> 
+                  <!--<li>---><a href="cours.php?page=<?= $i; ?>" class="num "><?= $i; ?></a><!--</li>--> 
             <?php endif?>
     <?php endfor; ?>
     <?php else :?>
-                  <!--<li>---><a href="actualites.php?page=<?= $i; ?>" class="num ">...</a><!--</li>--> 
+                  <!--<li>---><a href="cours.php?page=<?= $i; ?>" class="num ">...</a><!--</li>--> 
     <?php endif?>
    <!-- <li>-->
     <?php if ($Next <= $pages) :?>
-      <a href="actualites.php?page=<?= $Next; ?>"  class="next"><i class="fas fa-angle-right"></i></a>
+      <a href="cours.php?page=<?= $Next; ?>"  class="next"><i class="fas fa-angle-right"></i></a>
      <!--   <span aria-hidden="true">Next &raquo;</span>
       </a>-->
       <?php endif;?>
@@ -483,3 +491,15 @@ $(document).ready(function() {
         }
 });
 });</script>
+<style>
+input.btn.btn-danger {
+    font: -webkit-control;
+    background: crimson;
+    width: auto;
+}
+a.btn.btn-primary {
+    font: -webkit-control;
+    background: slategray;
+    width: auto;
+}
+</style>

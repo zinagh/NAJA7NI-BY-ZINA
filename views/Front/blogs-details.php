@@ -98,29 +98,29 @@ $break = $breakC->recentpost();?>
 
 <div class="small-container">
     <div class="row1">
-        <a href='actualitesfb.php' class='col-categories'>
-            <img src="assets/img/foot.png" alt="Football">
-            <h2>FOOTBALL</h2>
+        <a href='coursjava.php' class='col-categories'>
+            <img src="assets/img/java.jpg" alt="coursjava">
+            <h2>JAVA</h2>
         </a>
-        <a href='actualitescyclisme.php' class='col-categories'>
-            <img src="assets/img/cyclisme.png" alt="Cyclisme">
-            <h2>CYCLISME</h2>
+        <a href='coursphp.php' class='col-categories'>
+            <img src="assets/img/php.jpg" alt="coursphp">
+            <h2>PHP</h2>
         </a>
-        <a href='actualitesathletisme.php' class='col-categories'>
-            <img src="assets/img/athlet.png" alt="Athlétisme">
-            <h2>ATHLETISME</h2>
+        <a href='courshtml.php' class='col-categories'>
+            <img src="assets/img/html.jpg" alt="courshtml">
+            <h2>HTML</h2>
         </a>
-        <a href='actualitestennis.php' class='col-categories'>
-            <img src="assets/img/tennis.png" alt="Tennis">
-            <h2>TENNIS</h2>
+        <a href='coursjs.php' class='col-categories'>
+            <img src="assets/img/js.jpg" alt="coursjs">
+            <h2>JAVASCRIPT</h2>
         </a>
-        <a href='actualiteshb.php' class='col-categories'>
-            <img src="assets/img/hand.png" alt="Handball">
-            <h2>HANDBALL</h2>
+        <a href='courspyth.php' class='col-categories'>
+            <img src="assets/img/python.jpg" alt="courspyth">
+            <h2>PYTHON</h2>
         </a>
-        <a href='actualites.php' class='col-categories'>
-            <img src="assets/img/tous.png" style="width: 100%;" alt="NEWS">
-            <h2>TOUT ARTICLES</h2>
+        <a href='courspoo.php' class='col-categories'>
+            <img src="assets/img/poo.jpg" style="width: 100%;" alt="courspoo">
+            <h2>POO</h2>
         </a>
     </div>
 </div>
@@ -294,8 +294,8 @@ $rel = $relC->affichermostviews();?>
                 
             </div>
     <!--   <img  src="assets/img/<?PHP echo $row['urlImage']; ?>" alt="">  -->
-                <video width="320" height="240" controls="">
-  <source src="assets/img/<?PHP echo $path; ?>" type="video/mp4">
+                <video width="700" height="540" controls="">
+  <source src="assets/img/<?PHP echo $row['urlImage']; ?>"" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 

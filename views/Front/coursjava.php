@@ -244,7 +244,7 @@ btnscrolltotop.addEventListener("click", function () {
                 </div>
                 <div class="footer-col-2">
                     <img class="logofooter" src="assets/img/logo-footer.png" alt="">
-                    <p>Donnez Un Nouveau Style à Votre Entrainement !</p>
+                    <p>Donnez Un Nouveau Style à Vos Etudes !</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Liens</h3>
@@ -266,7 +266,7 @@ btnscrolltotop.addEventListener("click", function () {
                 </div>
             </div>
             <hr>
-            <p class="copyright">Copyright 2020 - SporTun</p>
+            <p class="copyright">Copyright 2022 - NAJA7NI</p>
         </div>
     </div>
     </div>

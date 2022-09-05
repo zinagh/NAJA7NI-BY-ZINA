@@ -1,5 +1,7 @@
 <?php
 include 'DBconnection.php';
+include_once 'C://wamp64/www/naja7ni/controller/userb.php';
+include_once 'C://wamp64/www/naja7ni/model/user.php';
 session_start();
 $compte="Compte";
 if (isset($_SESSION["email"]))
@@ -12,7 +14,46 @@ $error="";
 if (isset($_GET['msg']) ){
 $error=$_GET['msg'];
 }
+$art = null;
+$artC = new userb();
+if (
+    isset($_POST["nom"]) && 
+    isset($_POST["prenom"]) &&
+    isset($_POST["email"]) && 
+    isset($_POST["mdp"]) && 
+    isset($_POST["datenaissance"]) && 
+    isset($_POST["sexe"]) &&
+    isset($_POST["numtel"]) &&
+    isset($_POST["adresse"])
+) {
+    if (
+        !empty($_POST["nom"]) && 
+        !empty($_POST["prenom"]) &&
+        !empty($_POST["email"]) && 
+        !empty($_POST["mdp"]) && 
+        !empty($_POST["datenaissance"]) && 
+        !empty($_POST["sexe"]) &&
+        !empty($_POST["numtel"]) &&
+        !empty($_POST["adresse"]) 
+    ) {
+        $art = new user(
+            $_POST['nom'],
+            $_POST['prenom'],
+            $_POST['email'],
+            $_POST['mdp'],
+            $_POST['datenaissance'],
+            $_POST['sexe'],
+            $_POST['numtel'],
+            $_POST['adresse']
+                );
+        $artC->adduser($art);
+      //  header('Location:../Front/actualites.php');
+        $msg="Demande envoyée avec succès!";
 
+    }
+    else
+        $error = "Missing information";
+}
 ?>
 
 <!DOCTYPE html>
@@ -76,12 +117,12 @@ $error=$_GET['msg'];
                     </form>
                     
                     <div class="reg-container">
-                        <form action="../../controller/SignUp.php" method="POST" id="RegForm" name="f1" >
+                        <form action="" method="POST" id="RegForm" name="f1" >
                         <input type="text" name="nom" placeholder="Nom" id="nom">
                         <input type="text" name="prenom" placeholder="Prénom" id="prenom">
                         <input type="email" name="email" placeholder="Email" id="email">
                         <input type="password" name="mdp" placeholder="Mot de passe" id="mdp">
-                        <input type="password" name="mdp2" placeholder="Confirmer votre mot de passe" id="mdp2">
+                       <input type="password" name="mdp2" placeholder="Confirmer votre mot de passe" id="mdp2">
                         <input type="date" name="datenaissance" id="datenaissance" >
                         <input type="radio" name="sexe" id="homme" value="H" class="gender">
                         <label for="homme">Homme</label>
@@ -91,13 +132,15 @@ $error=$_GET['msg'];
                         <label for="autre">Autre</label>
                         <input type="text" name="numtel" placeholder="Numéro de téléphone" id="Numtel">
                         <input type="text" name="adresse" placeholder="Adresse" id="Adresse">
+
                         <p  id="erreur" style="color :#ff523b; margin:10px 0px;" ></p>
-                        <a href="href="#RegForm"></a><button  type="submit" class="btn" value="RegForm" onclick="return verif()">S'inscrire</button></a>
+                        <a href="#RegForm"></a><button  type="submit" class="btn" value="RegForm" onclick="return verif()" name="signup_submit">S'inscrire</button></a>
                         
                       </form>
                        
 
                     </div>
+                    <p style="color: rgb(255, 0, 0);" id="erreurinscription"></p>
 
  
                 
